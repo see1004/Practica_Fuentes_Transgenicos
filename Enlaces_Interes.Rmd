@@ -1,6 +1,6 @@
 ---
-title: "Enlaces_Interes"
-author: "Samuel Espiño"
+title: "Enlaces de Interes"
+author: "Samuel Espiño, Lucía Gil, Alvar Tomás Ortiz"
 date: "`r Sys.Date()`"
 output: html_document
 ---
