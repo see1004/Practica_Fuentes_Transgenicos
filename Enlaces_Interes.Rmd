@@ -19,6 +19,8 @@ Datos sobre agricultura en general en los 245 países que forman parte de FAO <h
 
 Datos sobre salud mundial en los países registrados por la OMS <https://data.who.int/>.
 
+International Service for the Acquisition of Agri-Biotech Applications (ISAAA) <https://www.isaaa.org/>.
+
 
 ### Estudios concretos en la OMS
 
