@@ -18,3 +18,27 @@ PDF encontrado en FAO con listado de las hectáreas de cultivos GMO's por país 
 Datos sobre agricultura en general en los 245 países que forman parte de FAO <https://www.fao.org/faostat/es/#data>.
 
 Datos sobre salud mundial en los países registrados por la OMS <https://data.who.int/>.
+
+
+#Estudios concretos en la OMS
+
+Proporción de infección de E.coli por países <https://data.who.int/indicators/i/745F475>
+
+Hipertensión en adultos por países <https://data.who.int/indicators/i/608DE39>
+
+Obesidad en adultos por países <https://data.who.int/indicators/i/BEFA58B>
+
+Obesidad en niños y adolescentes por países <https://data.who.int/indicators/i/EF93DDB>
+
+Obesidad en niños (menos de 5 años) por países <https://data.who.int/indicators/i/64E2430>
+
+Tasa de mortalidad por envenenamiento no intencionado <https://data.who.int/indicators/i/84FD3DE>
+
+Probabilidad de muerte prematura por enfermedades no transmisibles <https://data.who.int/indicators/i/1F96863>
+
+Retraso del crecimiento en niños (menores de 5 años) <https://data.who.int/indicators/i/5F8A486>
+
+Casos de tuberculosis <https://data.who.int/indicators/i/C288D13>
+
+Casos de poliomielitis causada por poliovirus salvaje <https://data.who.int/indicators/i/7B2BFA6>
+
