@@ -97,5 +97,8 @@ d_mama
 
 
 ```{r}
+library(readxl)
+d_cultivos <- read_excel("INPUT/DATA/Table_CROPGRIDS_COU.xlsx")
+d_cultivos
 ```
 
