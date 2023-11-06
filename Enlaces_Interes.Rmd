@@ -9,6 +9,11 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+## Tema: 
+
+ Relación de disminución de enfermedades por cultivos trangénicos
+ 
+ 
 ## Enlaces de Interés para el desarrollo del seminario
 
 Organización europea encargada de la alimentación y agricultura (Food and Agriculture Organisation) <https://www.fao.org/home/es>
@@ -23,6 +28,7 @@ Datos sobre salud mundial en los países registrados por la OMS <https://data.wh
 
 International Service for the Acquisition of Agri-Biotech Applications (ISAAA) <https://www.isaaa.org/>.
 
+Conjunto de datos globales georreferenciado de 173 cultivos alrededor de 2020: <https://figshare.com/articles/dataset/CROPGRIDS/22491997?file=41952177>
 
 ### Estudios concretos en la OMS
 
@@ -45,4 +51,51 @@ Retraso del crecimiento en niños (menores de 5 años) <https://data.who.int/ind
 Casos de tuberculosis <https://data.who.int/indicators/i/C288D13>
 
 Casos de poliomielitis causada por poliovirus salvaje <https://data.who.int/indicators/i/7B2BFA6>
+
+## Enlaces de bases de datos relacionados con el tema
+
+Insuficiencia cardiaca <https://www.ine.es/consul/serie.do?d=true&s=ECM351>
+
+Cancer de colon: <https://ec.europa.eu/eurostat/databrowser/view/hlth_ehis_pa5u/default/table?lang=en>
+
+Indice de abortos en Europa: <https://ec.europa.eu/eurostat/databrowser/view/demo_fabortind/default/table?lang=en>
+
+## Tablas de valores
+
+
+```{r}
+library(readxl)
+d_Insu_esp <- read_excel("INPUT/DATA/datos_insuficiencia_cardiaca.xls")
+d_Insu_esp
+
+```
+
+
+```{r}
+library(readr)
+aborto <- read_delim("INPUT/DATA/datos_aborto.tsv", 
+    delim = "\t", escape_double = FALSE, 
+    trim_ws = TRUE)
+aborto
+```
+
+
+```{r}
+library(readr)
+d_colon <- read_csv("INPUT/DATA/datos_cancer_colon.tsv")
+d_colon
+```
+
+
+```{r}
+library(readr)
+d_mama <- read_delim("INPUT/DATA/datos_cancer_mama.tsv", 
+    delim = "\t", escape_double = FALSE, 
+    trim_ws = TRUE)
+d_mama
+```
+
+
+```{r}
+```
 
