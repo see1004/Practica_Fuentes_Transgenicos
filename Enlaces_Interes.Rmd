@@ -64,9 +64,9 @@ Indice de abortos en Europa: <https://ec.europa.eu/eurostat/databrowser/view/dem
 
 
 ```{r}
-library(readxl)
-d_Insu_esp <- read_excel("INPUT/DATA/datos_insuficiencia_cardiaca.xls")
-d_Insu_esp
+library(readr)
+ins_car <- read_csv("INPUT/DATA/datos_insuficiencia_cardiaca.tsv")
+ins_car
 
 ```
 
