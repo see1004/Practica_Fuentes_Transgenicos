@@ -28,7 +28,9 @@ Indice de abortos en Europa: [Here](https://ec.europa.eu/eurostat/databrowser/vi
 
 ```{r}
 library(readr)
-ins_car <- read_csv("INPUT/DATA/datos_insuficiencia_cardiaca.tsv")
+ins_car <- read_delim("INPUT/DATA/datos_insuficiencia_cardiaca.tsv", 
+    delim = "\t", escape_double = FALSE, 
+    trim_ws = TRUE)
 ins_car
 
 ```
@@ -45,7 +47,9 @@ aborto
 
 ```{r}
 library(readr)
-d_colon <- read_csv("INPUT/DATA/datos_cancer_colon.tsv")
+d_colon <- read_delim("INPUT/DATA/datos_cancer_colon.tsv", 
+    delim = "\t", escape_double = FALSE, 
+    trim_ws = TRUE)
 d_colon
 ```
 
