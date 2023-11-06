@@ -1,5 +1,5 @@
 ---
-title: "Enlaces de Interes"
+title: "Objetivo General"
 author: "Samuel Espiño, Lucía Gil, Alvar Tomás Ortiz"
 date: "`r Sys.Date()`"
 output: html_document
@@ -9,56 +9,19 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Tema: 
+## Objetivos específicos: 
 
  Relación de disminución de enfermedades por cultivos trangénicos
- 
- 
-## Enlaces de Interés para el desarrollo del seminario
-
-Organización europea encargada de la alimentación y agricultura (Food and Agriculture Organisation) <https://www.fao.org/home/es>
-
-PDF encontrado en FAO con listado de las hectáreas de cultivos GMO's por país (25 países) y las especies de dichos cultivos en 2008 <https://www.isaaa.org/resources/publications/briefs/39/executivesummary/pdf/Brief%2039%20-%20Executive%20Summary%20-%20English.pdf>.
-
-Actualización de la tabla anterior con los datos de 2019 <https://www.isaaa.org/resources/publications/briefs/55/executivesummary/default.asp>.
-
-Datos sobre agricultura en general en los 245 países que forman parte de FAO <https://www.fao.org/faostat/es/#data>.
-
-Datos sobre salud mundial en los países registrados por la OMS <https://data.who.int/>.
-
-International Service for the Acquisition of Agri-Biotech Applications (ISAAA) <https://www.isaaa.org/>.
-
-Conjunto de datos globales georreferenciado de 173 cultivos alrededor de 2020: <https://figshare.com/articles/dataset/CROPGRIDS/22491997?file=41952177>
-
-### Estudios concretos en la OMS
-
-Proporción de infección de E.coli por países <https://data.who.int/indicators/i/745F475>
-
-Hipertensión en adultos por países <https://data.who.int/indicators/i/608DE39>
-
-Obesidad en adultos por países <https://data.who.int/indicators/i/BEFA58B>
-
-Obesidad en niños y adolescentes por países <https://data.who.int/indicators/i/EF93DDB>
-
-Obesidad en niños (menos de 5 años) por países <https://data.who.int/indicators/i/64E2430>
-
-Tasa de mortalidad por envenenamiento no intencionado <https://data.who.int/indicators/i/84FD3DE>
-
-Probabilidad de muerte prematura por enfermedades no transmisibles <https://data.who.int/indicators/i/1F96863>
-
-Retraso del crecimiento en niños (menores de 5 años) <https://data.who.int/indicators/i/5F8A486>
-
-Casos de tuberculosis <https://data.who.int/indicators/i/C288D13>
-
-Casos de poliomielitis causada por poliovirus salvaje <https://data.who.int/indicators/i/7B2BFA6>
 
 ## Enlaces de bases de datos relacionados con el tema
 
-Insuficiencia cardiaca <https://www.ine.es/consul/serie.do?d=true&s=ECM351>
+Conjunto de datos globales georreferenciado de 173 cultivos alrededor de 2020: [Here](https://figshare.com/articles/dataset/CROPGRIDS/22491997?file=41952177)
 
-Cancer de colon: <https://ec.europa.eu/eurostat/databrowser/view/hlth_ehis_pa5u/default/table?lang=en>
+Insuficiencia cardiaca: [Here](https://ec.europa.eu/eurostat/databrowser/view/hlth_ehis_pa2u/default/table?lang=en)
 
-Indice de abortos en Europa: <https://ec.europa.eu/eurostat/databrowser/view/demo_fabortind/default/table?lang=en>
+Cancer de colon: [Here](https://ec.europa.eu/eurostat/databrowser/view/hlth_ehis_pa5u/default/table?lang=en)
+
+Indice de abortos en Europa: [Here](https://ec.europa.eu/eurostat/databrowser/view/demo_fabortind/default/table?lang=en) 
 
 ## Tablas de valores
 

@@ -11,9 +11,9 @@
 
 <meta name="author" content="Samuel Espiño, Lucía Gil, Alvar Tomás Ortiz" />
 
-<meta name="date" content="2023-10-16" />
+<meta name="date" content="2023-11-06" />
 
-<title>Enlaces de Interes</title>
+<title>Objetivo General</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -350,38 +350,155 @@ display: none;
 
 
 
-<h1 class="title toc-ignore">Enlaces de Interes</h1>
+<h1 class="title toc-ignore">Objetivo General</h1>
 <h4 class="author">Samuel Espiño, Lucía Gil, Alvar Tomás Ortiz</h4>
-<h4 class="date">2023-10-16</h4>
+<h4 class="date">2023-11-06</h4>
 
 </div>
 
 
-<div id="enlaces-de-interés-para-el-desarrollo-del-seminario" class="section level2">
-<h2>Enlaces de Interés para el desarrollo del seminario</h2>
-<p>Organización europea encargada de la alimentación y agricultura (Food
-and Agriculture Organisation) <a href="https://www.fao.org/home/es" class="uri">https://www.fao.org/home/es</a></p>
-<p>PDF encontrado en FAO con listado de las hectáreas de cultivos GMO’s
-por país (25 países) y las especies de dichos cultivos en 2008 <a href="https://www.isaaa.org/resources/publications/briefs/39/executivesummary/pdf/Brief%2039%20-%20Executive%20Summary%20-%20English.pdf" class="uri">https://www.isaaa.org/resources/publications/briefs/39/executivesummary/pdf/Brief%2039%20-%20Executive%20Summary%20-%20English.pdf</a>.</p>
-<p>Actualización de la tabla anterior con los datos de 2019 <a href="https://www.isaaa.org/resources/publications/briefs/55/executivesummary/default.asp" class="uri">https://www.isaaa.org/resources/publications/briefs/55/executivesummary/default.asp</a>.</p>
-<p>Datos sobre agricultura en general en los 245 países que forman parte
-de FAO <a href="https://www.fao.org/faostat/es/#data" class="uri">https://www.fao.org/faostat/es/#data</a>.</p>
-<p>Datos sobre salud mundial en los países registrados por la OMS <a href="https://data.who.int/" class="uri">https://data.who.int/</a>.</p>
-<p>International Service for the Acquisition of Agri-Biotech
-Applications (ISAAA) <a href="https://www.isaaa.org/" class="uri">https://www.isaaa.org/</a>.</p>
-<div id="estudios-concretos-en-la-oms" class="section level3">
-<h3>Estudios concretos en la OMS</h3>
-<p>Proporción de infección de E.coli por países <a href="https://data.who.int/indicators/i/745F475" class="uri">https://data.who.int/indicators/i/745F475</a></p>
-<p>Hipertensión en adultos por países <a href="https://data.who.int/indicators/i/608DE39" class="uri">https://data.who.int/indicators/i/608DE39</a></p>
-<p>Obesidad en adultos por países <a href="https://data.who.int/indicators/i/BEFA58B" class="uri">https://data.who.int/indicators/i/BEFA58B</a></p>
-<p>Obesidad en niños y adolescentes por países <a href="https://data.who.int/indicators/i/EF93DDB" class="uri">https://data.who.int/indicators/i/EF93DDB</a></p>
-<p>Obesidad en niños (menos de 5 años) por países <a href="https://data.who.int/indicators/i/64E2430" class="uri">https://data.who.int/indicators/i/64E2430</a></p>
-<p>Tasa de mortalidad por envenenamiento no intencionado <a href="https://data.who.int/indicators/i/84FD3DE" class="uri">https://data.who.int/indicators/i/84FD3DE</a></p>
-<p>Probabilidad de muerte prematura por enfermedades no transmisibles <a href="https://data.who.int/indicators/i/1F96863" class="uri">https://data.who.int/indicators/i/1F96863</a></p>
-<p>Retraso del crecimiento en niños (menores de 5 años) <a href="https://data.who.int/indicators/i/5F8A486" class="uri">https://data.who.int/indicators/i/5F8A486</a></p>
-<p>Casos de tuberculosis <a href="https://data.who.int/indicators/i/C288D13" class="uri">https://data.who.int/indicators/i/C288D13</a></p>
-<p>Casos de poliomielitis causada por poliovirus salvaje <a href="https://data.who.int/indicators/i/7B2BFA6" class="uri">https://data.who.int/indicators/i/7B2BFA6</a></p>
+<div id="objetivos-específicos" class="section level2">
+<h2>Objetivos específicos:</h2>
+<p>Relación de disminución de enfermedades por cultivos trangénicos</p>
 </div>
+<div id="enlaces-de-bases-de-datos-relacionados-con-el-tema" class="section level2">
+<h2>Enlaces de bases de datos relacionados con el tema</h2>
+<p>Conjunto de datos globales georreferenciado de 173 cultivos alrededor
+de 2020: <a href="https://figshare.com/articles/dataset/CROPGRIDS/22491997?file=41952177">Here</a></p>
+<p>Insuficiencia cardiaca: <a href="https://ec.europa.eu/eurostat/databrowser/view/hlth_ehis_pa2u/default/table?lang=en">Here</a></p>
+<p>Cancer de colon: <a href="https://ec.europa.eu/eurostat/databrowser/view/hlth_ehis_pa5u/default/table?lang=en">Here</a></p>
+<p>Indice de abortos en Europa: <a href="https://ec.europa.eu/eurostat/databrowser/view/demo_fabortind/default/table?lang=en">Here</a></p>
+</div>
+<div id="tablas-de-valores" class="section level2">
+<h2>Tablas de valores</h2>
+<pre class="r"><code>library(readr)
+ins_car &lt;- read_csv(&quot;INPUT/DATA/datos_insuficiencia_cardiaca.tsv&quot;)</code></pre>
+<pre><code>## Rows: 124740 Columns: 8
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr (8): freq, duration, hlthcare, sex, age, quant_inc, unit, geo\TIME_PERIO...
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<pre class="r"><code>ins_car</code></pre>
+<pre><code>## # A tibble: 124,740 × 8
+##    freq  duration hlthcare sex   age   quant_inc unit  `geo\\TIME_PERIOD\t2019`
+##    &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;                   
+##  1 A     NEV      HC_BLCH  F     TOTAL QU1       PC    &quot;AT\t8.2&quot;               
+##  2 A     NEV      HC_BLCH  F     TOTAL QU1       PC    &quot;BE\t15.7&quot;              
+##  3 A     NEV      HC_BLCH  F     TOTAL QU1       PC    &quot;BG\t10.8&quot;              
+##  4 A     NEV      HC_BLCH  F     TOTAL QU1       PC    &quot;CY\t2.1&quot;               
+##  5 A     NEV      HC_BLCH  F     TOTAL QU1       PC    &quot;CZ\t5.5&quot;               
+##  6 A     NEV      HC_BLCH  F     TOTAL QU1       PC    &quot;DE\t11.2&quot;              
+##  7 A     NEV      HC_BLCH  F     TOTAL QU1       PC    &quot;DK\t28.9&quot;              
+##  8 A     NEV      HC_BLCH  F     TOTAL QU1       PC    &quot;EE\t5.0&quot;               
+##  9 A     NEV      HC_BLCH  F     TOTAL QU1       PC    &quot;EL\t8.9&quot;               
+## 10 A     NEV      HC_BLCH  F     TOTAL QU1       PC    &quot;ES\t9.8&quot;               
+## # ℹ 124,730 more rows</code></pre>
+<pre class="r"><code>library(readr)
+aborto &lt;- read_delim(&quot;INPUT/DATA/datos_aborto.tsv&quot;, 
+    delim = &quot;\t&quot;, escape_double = FALSE, 
+    trim_ws = TRUE)</code></pre>
+<pre><code>## Rows: 29 Columns: 10
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;\t&quot;
+## chr (10): freq,indic_de,unit,geo\TIME_PERIOD, 2013, 2014, 2015, 2016, 2017, ...
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<pre class="r"><code>aborto</code></pre>
+<pre><code>## # A tibble: 29 × 10
+##    freq,indic_de,unit,geo\\TI…¹ `2013` `2014` `2015` `2016` `2017` `2018` `2019`
+##    &lt;chr&gt;                        &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt; 
+##  1 A,ABORTRT,RT,AL              :      6.1    6.2    :      1.1    1.3    1.0   
+##  2 A,ABORTRT,RT,AM              :      :      11.3   10.8   10.5   11.1   11.7  
+##  3 A,ABORTRT,RT,AZ              8.4    8.2    8.3    10.5   10.5   11.0   11.4  
+##  4 A,ABORTRT,RT,BG              14.6   14.1   14.1   13.6   12.7   12.4   11.6  
+##  5 A,ABORTRT,RT,BY              10.5   10.2   10.1   9.6    9.0    8.4    :     
+##  6 A,ABORTRT,RT,CH              4.2    4.1    4.1    4.1    4.0    4.2    3.7   
+##  7 A,ABORTRT,RT,CZ              7.6    7.3    6.8    6.9    6.5    6.2    6.0   
+##  8 A,ABORTRT,RT,DE              :      4.4    4.4    4.4    4.5    4.5    4.6   
+##  9 A,ABORTRT,RT,DE_TOT          4.5    4.4    4.4    4.4    4.5    4.5    4.6   
+## 10 A,ABORTRT,RT,DK              9.3    9.3    :      :      :      :      :     
+## # ℹ 19 more rows
+## # ℹ abbreviated name: ¹​`freq,indic_de,unit,geo\\TIME_PERIOD`
+## # ℹ 2 more variables: `2020` &lt;chr&gt;, `2021` &lt;chr&gt;</code></pre>
+<pre class="r"><code>library(readr)
+d_colon &lt;- read_csv(&quot;INPUT/DATA/datos_cancer_colon.tsv&quot;)</code></pre>
+<pre><code>## Rows: 165 Columns: 7
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr (6): freq, duration, deg_urb, age, unit, geo\TIME_PERIOD 2014
+## lgl (1): sex
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<pre class="r"><code>d_colon</code></pre>
+<pre><code>## # A tibble: 165 × 7
+##    freq  duration deg_urb sex   age    unit  `geo\\TIME_PERIOD\t2014`
+##    &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;lgl&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;                   
+##  1 A     NEV      TOTAL   TRUE  Y50-74 PC    &quot;AT\t22.1&quot;              
+##  2 A     NEV      TOTAL   TRUE  Y50-74 PC    &quot;BE\t75.2 u&quot;            
+##  3 A     NEV      TOTAL   TRUE  Y50-74 PC    &quot;BG\t90.4&quot;              
+##  4 A     NEV      TOTAL   TRUE  Y50-74 PC    &quot;CY\t91.5&quot;              
+##  5 A     NEV      TOTAL   TRUE  Y50-74 PC    &quot;CZ\t36.7&quot;              
+##  6 A     NEV      TOTAL   TRUE  Y50-74 PC    &quot;DE\t19.0&quot;              
+##  7 A     NEV      TOTAL   TRUE  Y50-74 PC    &quot;DK\t51.5&quot;              
+##  8 A     NEV      TOTAL   TRUE  Y50-74 PC    &quot;EE\t82.8&quot;              
+##  9 A     NEV      TOTAL   TRUE  Y50-74 PC    &quot;EL\t77.3&quot;              
+## 10 A     NEV      TOTAL   TRUE  Y50-74 PC    &quot;ES\t80.8&quot;              
+## # ℹ 155 more rows</code></pre>
+<pre class="r"><code>library(readr)
+d_mama &lt;- read_delim(&quot;INPUT/DATA/datos_cancer_mama.tsv&quot;, 
+    delim = &quot;\t&quot;, escape_double = FALSE, 
+    trim_ws = TRUE)</code></pre>
+<pre><code>## Rows: 29 Columns: 11
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;\t&quot;
+## chr (11): freq,unit,source,icd10,geo\TIME_PERIOD, 2012, 2013, 2014, 2015, 20...
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<pre class="r"><code>d_mama</code></pre>
+<pre><code>## # A tibble: 29 × 11
+##    freq,unit,source,icd10,geo…¹ `2012` `2013` `2014` `2015` `2016` `2017` `2018`
+##    &lt;chr&gt;                        &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt; 
+##  1 A,PC,PRG,C50,BE              62.70  62.30  61.90  61.60  61.80  61.00  60.20 
+##  2 A,PC,PRG,C50,BG              :      :      :      13.70  21.20… 20.55  :     
+##  3 A,PC,PRG,C50,CY              31.28… 31.72… 33.64… 35.48… 35.15… 34.79… 33.21…
+##  4 A,PC,PRG,C50,CZ              54.40  57.70  60.60  61.00  60.40  60.80  60.30 
+##  5 A,PC,PRG,C50,DE              56.30  56.60  54.30  51.60  51.00  49.40  50.10 
+##  6 A,PC,PRG,C50,DK              83.00  :      84.30  :      82.10  :      83.20 
+##  7 A,PC,PRG,C50,EE              52.00… 53.40… 58.00… 50.80… 56.30… 55.90… 52.80 
+##  8 A,PC,PRG,C50,FI              83.00  83.30  82.90  82.70  82.60  81.90  81.40 
+##  9 A,PC,PRG,C50,FR              52.80  51.60  52.00  51.40  50.60  49.90  50.30 
+## 10 A,PC,PRG,C50,HR              60.00  60.00  60.00  60.00  60.00  60.00  64.00 
+## # ℹ 19 more rows
+## # ℹ abbreviated name: ¹​`freq,unit,source,icd10,geo\\TIME_PERIOD`
+## # ℹ 3 more variables: `2019` &lt;chr&gt;, `2020` &lt;chr&gt;, `2021` &lt;chr&gt;</code></pre>
+<pre class="r"><code>library(readxl)
+d_cultivos &lt;- read_excel(&quot;INPUT/DATA/Table_CROPGRIDS_COU.xlsx&quot;)
+d_cultivos</code></pre>
+<pre><code>## # A tibble: 206 × 175
+##    `Country ISO2 code` `Country Name` abaca agave    alfalfa   almond   aniseetc
+##    &lt;chr&gt;               &lt;chr&gt;          &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;      &lt;dbl&gt;
+##  1 AF                  Afghanistan        0     0      50.8     35.2     2.47   
+##  2 AL                  Albania            0     0   72010.      23.5     0.265  
+##  3 DZ                  Algeria            0     0    3940.   26798.     35.7    
+##  4 AD                  Andorra            0     0       1.74     2.28    0.00567
+##  5 AO                  Angola             0     0       0        0       0      
+##  6 AG                  Antigua            0     0       0        0       0      
+##  7 AR                  Argentina          0     0 1537869.     235.   3306.     
+##  8 AM                  Armenia            0     0      62.3     81.1     5.34   
+##  9 AU                  Australia          0     0  187586.    8240.      0      
+## 10 AT                  Austria            0     0    6777.       5.97    0.439  
+## # ℹ 196 more rows
+## # ℹ 168 more variables: apple &lt;dbl&gt;, apricot &lt;dbl&gt;, areca &lt;dbl&gt;,
+## #   artichoke &lt;dbl&gt;, asparagus &lt;dbl&gt;, avocado &lt;dbl&gt;, bambara &lt;dbl&gt;,
+## #   banana &lt;dbl&gt;, barley &lt;dbl&gt;, bean &lt;dbl&gt;, beetfor &lt;dbl&gt;, berrynes &lt;dbl&gt;,
+## #   blueberry &lt;dbl&gt;, brazil &lt;dbl&gt;, broadbean &lt;dbl&gt;, buckwheat &lt;dbl&gt;,
+## #   cabbage &lt;dbl&gt;, cabbagefor &lt;dbl&gt;, canaryseed &lt;dbl&gt;, carob &lt;dbl&gt;,
+## #   carrot &lt;dbl&gt;, carrotfor &lt;dbl&gt;, cashew &lt;dbl&gt;, cashewapple &lt;dbl&gt;, …</code></pre>
 </div>
 
 
