@@ -23,11 +23,15 @@ Cancer de colon: [Here](https://ec.europa.eu/eurostat/databrowser/view/hlth_ehis
 
 Indice de abortos en Europa: [Here](https://ec.europa.eu/eurostat/databrowser/view/demo_fabortind/default/table?lang=en) 
 
-## Tablas de valores
-
-
+Cardiopatias isquémicas : <https://gateway.euro.who.int/en/indicators/hfamdb_427-deaths-ischaemic-heart-disease/?id=30289>
+## Librerias que importamos para el trabajo
 ```{r}
-library(readr)
+library(tidyverse)
+library(readxl)
+```
+
+## Tablas de valores
+```{r}
 ins_car <- read_delim("INPUT/DATA/datos_insuficiencia_cardiaca.tsv", 
     delim = "\t", escape_double = FALSE, 
     trim_ws = TRUE)
@@ -37,7 +41,6 @@ ins_car
 
 
 ```{r}
-library(readr)
 aborto <- read_delim("INPUT/DATA/datos_aborto.tsv", 
     delim = "\t", escape_double = FALSE, 
     trim_ws = TRUE)
@@ -46,7 +49,6 @@ aborto
 
 
 ```{r}
-library(readr)
 d_colon <- read_delim("INPUT/DATA/datos_cancer_colon.tsv", 
     delim = "\t", escape_double = FALSE, 
     trim_ws = TRUE)
@@ -55,7 +57,6 @@ d_colon
 
 
 ```{r}
-library(readr)
 d_mama <- read_delim("INPUT/DATA/datos_cancer_mama.tsv", 
     delim = "\t", escape_double = FALSE, 
     trim_ws = TRUE)
@@ -64,8 +65,37 @@ d_mama
 
 
 ```{r}
-library(readxl)
 d_cultivos <- read_excel("INPUT/DATA/Table_CROPGRIDS_COU.xlsx")
 d_cultivos
+```
+```{r}
+inf_data <- read_excel("INPUT/DATA/HFAMDB_427_EN.xlsx", 
+    sheet = "Data (pivoted)")
+inf_data
+```
+## Seleccionamos los datos 
+
+Selección de los 3 cultivos que vamos a usar
+```{r}
+d_cultivos_e <- select(d_cultivos,cauliflower,cucumberetc,greenbean)
+d_cultivos_e
+```
+Seleccion de la media de los años 2015-2020 en casos de cardiopatias isquemicas
+```{r}
+inf_data_e= select(inf_data,2015)
+```
+
+Seleccion de la media de los años 2015-2020 en casos de cancer de colon
+```{r}
+d_colon_f = rowMeans(d_colon[,c("2015","2016","2017","2018","2019","2020")])
+```
+Seleccion de la media de los años 2015-2020 en casos de cander de mama
+```{r}
+
+```
+
+Seleccion de la media de los años 2015-2020 en casos de abortos de europa
+```{r}
+
 ```
 
