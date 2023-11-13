@@ -31,14 +31,6 @@ library(readxl)
 ```
 
 ## Tablas de valores
-```{r}
-ins_car <- read_delim("INPUT/DATA/datos_insuficiencia_cardiaca.tsv", 
-    delim = "\t", escape_double = FALSE, 
-    trim_ws = TRUE)
-ins_car
-
-```
-
 
 ```{r}
 aborto <- read_delim("INPUT/DATA/datos_aborto.tsv", 
