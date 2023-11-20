@@ -36,6 +36,8 @@ library(readxl)
 aborto <- read_delim("INPUT/DATA/datos_aborto.tsv", 
     delim = "\t", escape_double = FALSE, 
     trim_ws = TRUE)
+aborto <- aborto %>% separate(col = 1, into = c(NA,NA,NA,"Pais"), sep = ",")
+aborto <- aborto %>% dplyr::na_if(":")
 aborto
 ```
 
@@ -44,6 +46,7 @@ aborto
 d_colon <- read_delim("INPUT/DATA/datos_cancer_colon.tsv", 
     delim = "\t", escape_double = FALSE, 
     trim_ws = TRUE)
+d_colon <- d_colon %>% separate(col = 1, into = c(NA,NA,NA,NA,"Pais"), sep = ",")
 d_colon
 ```
 
@@ -52,12 +55,14 @@ d_colon
 d_mama <- read_delim("INPUT/DATA/datos_cancer_mama.tsv", 
     delim = "\t", escape_double = FALSE, 
     trim_ws = TRUE)
+d_mama <- d_mama %>% separate(col = 1, into = c(NA,NA,NA,NA,"Pais"), sep = ",")
 d_mama
 ```
 
 
 ```{r}
 d_cultivos <- read_excel("INPUT/DATA/Table_CROPGRIDS_COU.xlsx")
+d_cultivos <- d_cultivos %>% rename(Pais = "Country ISO2 code" )
 d_cultivos
 ```
 ```{r}
@@ -69,7 +74,7 @@ inf_data
 
 Selección de los 3 cultivos que vamos a usar
 ```{r}
-d_cultivos_e <- select(d_cultivos,cauliflower,cucumberetc,greenbean)
+d_cultivos_e <- select(d_cultivos,Pais,cauliflower,cucumberetc,greenbean)
 d_cultivos_e
 ```
 Seleccion de la media de los años 2015-2020 en casos de cardiopatias isquemicas
