@@ -48,8 +48,9 @@ aborto
 
 ```{r}
 d_colon <- fromJSON(file = "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/hlth_ehis_pa5u?format=JSON&lang=en&time=2014&time=2019")
-head(d_colon)
-d_colon <- d_colon %>% separate(col = 1, into = c(NA,NA,NA,NA,"Pais"), sep = ",")
+view(d_colon)
+
+
 ```
 
 
