@@ -35,8 +35,12 @@ library(readxl)
 ```{r}
 aborto <- read_delim("INPUT/DATA/datos_aborto.tsv", 
     delim = "\t", escape_double = FALSE, 
-    trim_ws = TRUE)
-aborto
+    trim_ws = TRUE) 
+aborto %>% 
+  rename (.data = ., `freq,indic_de,unit,geo` = `freq,indic_de,unit,geo\TIME_PERIOD`) %>%
+  separate (.data = ., col = `freq,indic_de,unit,geo`, into = c(freq,indic_de, unit, geo), sep = ",")
+  
+  
 ```
 
 
