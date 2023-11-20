@@ -28,6 +28,8 @@ Cardiopatias isquémicas : <https://gateway.euro.who.int/en/indicators/hfamdb_42
 ```{r}
 library(tidyverse)
 library(readxl)
+library(rjson)
+library(tidyjson)
 ```
 
 ## Tablas de valores
@@ -44,11 +46,9 @@ aborto
 
 
 ```{r}
-d_colon <- read_delim("INPUT/DATA/datos_cancer_colon.tsv", 
-    delim = "\t", escape_double = FALSE, 
-    trim_ws = TRUE)
+d_colon <- fromJSON(file = "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/hlth_ehis_pa5u?format=JSON&lang=en&time=2014&time=2019")
+head(d_colon)
 d_colon <- d_colon %>% separate(col = 1, into = c(NA,NA,NA,NA,"Pais"), sep = ",")
-d_colon
 ```
 
 
