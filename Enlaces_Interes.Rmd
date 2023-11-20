@@ -38,7 +38,8 @@ aborto <- read_delim("INPUT/DATA/datos_aborto.tsv",
     trim_ws = TRUE)
 aborto <- aborto %>%
     separate(col = 1, into = c(NA,NA,NA,"Pais"), sep = ",") %>%
-    mutate(across(where(is.character), ~na_if(.,":")))
+    mutate(across("2013":"2021", ~na_if(.,":"))) %>%
+    mutate(across("2013":"2021", ~as.numeric(.)))
 aborto
 ```
 
