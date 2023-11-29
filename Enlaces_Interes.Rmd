@@ -43,7 +43,7 @@ aborto <- read_delim("INPUT/DATA/datos_aborto.tsv",
     delim = "\t", escape_double = FALSE, 
     trim_ws = TRUE)
 aborto <- aborto %>%
-    separate(col = 1, into = c(NA,NA,NA,"Pais"), sep = ",") %>%
+    separate(col = 1, into = c("A","ABORT","RT","Pais"), sep = ",") %>%
     mutate(across("2013":"2021", ~na_if(.,":"))) %>%
     mutate(across("2013":"2021", ~as.numeric(.)))
 aborto <- select(aborto,Pais,"2015":"2020")
@@ -58,23 +58,18 @@ aborto
 
 
 ```{r}
-eliminar_no_numericos <- function(x) {
-  x <- gsub("[^0-9.]", "", x)
-  x <- as.numeric(x)
-  return(x)
-}
 d_mama <- read_delim("INPUT/DATA/datos_cancer_mama.tsv", 
     delim = "\t", escape_double = FALSE, 
     trim_ws = TRUE)
 d_mama <- d_mama %>% 
-  separate(col = 1, into = c(NA,NA,NA,NA,"Pais"), sep = ",") %>%
+  separate(col = 1, into = c("A","PC","PGR","C50","Pais"), sep = ",") %>%
   mutate(across("2000":"2021", ~na_if(.,":")))
 d_mama  <- select(d_mama,Pais,"2015":"2020")
 d_mama <- d_mama %>%
   pivot_longer(cols="2015":"2020",
                names_to = "Años",
                values_to = "Valores") %>%
-  mutate(Valores = as.numeric(eliminar_no_numericos(Valores)))
+  mutate(Valores = as.numeric(gsub("[^0-9.]", "", Valores)))
 d_mama
 ```
 
