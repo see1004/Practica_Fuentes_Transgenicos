@@ -58,6 +58,11 @@ aborto
 
 
 ```{r}
+eliminar_no_numericos <- function(x) {
+  x <- gsub("[^0-9.]", "", x)
+  x <- as.numeric(x)
+  return(x)
+}
 d_mama <- read_delim("INPUT/DATA/datos_cancer_mama.tsv", 
     delim = "\t", escape_double = FALSE, 
     trim_ws = TRUE)
@@ -71,7 +76,6 @@ d_mama <- d_mama %>%
                values_to = "Valores") %>%
   mutate(Valores = as.numeric(eliminar_no_numericos(Valores)))
 d_mama
-
 ```
 
 
