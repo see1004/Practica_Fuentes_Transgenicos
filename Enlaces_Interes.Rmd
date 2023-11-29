@@ -68,8 +68,8 @@ d_mama  <- select(d_mama,Pais,"2015":"2020")
 d_mama <- d_mama %>%
   pivot_longer(cols="2015":"2020",
                names_to = "Años",
-               values_to = "Valores")
- 
+               values_to = "Valores") %>%
+  mutate(Valores = as.numeric(eliminar_no_numericos(Valores)))
 d_mama
 
 ```
