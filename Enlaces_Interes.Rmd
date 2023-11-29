@@ -33,6 +33,7 @@ library(tidyverse)
 library(readxl)
 library(rjson)
 library(tidyjson)
+library(jsonlite)
 ```
 
 ## Tablas de valores
@@ -57,12 +58,6 @@ aborto
 
 
 ```{r}
-d_colon
-
-
-```
-
-```{r}
 d_mama <- read_delim("INPUT/DATA/datos_cancer_mama.tsv", 
     delim = "\t", escape_double = FALSE, 
     trim_ws = TRUE)
@@ -74,13 +69,12 @@ d_mama <- d_mama %>%
   pivot_longer(cols="2015":"2020",
                names_to = "Años",
                values_to = "Valores")
-eliminar_no_numericos <- function(cadena) {
-  str_replace_all(cadena, "[^0-9.]+", "")
-}
+
 d_mama <- d_mama %>%
   separate(col = 1, into = c(NA, NA, NA, NA, "Pais"), sep = ",") %>%
   mutate_at(vars(c("Valores")), ~as.numeric(eliminar_no_numericos(.)))
 d_mama
+
 ```
 
 
