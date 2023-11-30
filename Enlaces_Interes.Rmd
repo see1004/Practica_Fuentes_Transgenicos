@@ -83,9 +83,12 @@ d_cultivos <- d_cultivos %>% rename(Pais = "Country ISO2 code" )
 d_cultivos
 ```
 ```{r}
-inf_data <- read_excel("INPUT/DATA/HFAMDB_427_EN.xlsx", 
-    sheet = "Data (pivoted)")
+inf_data <- read_excel("INPUT/DATA/HFAMDB_427_EN.xlsx", sheet = "Data (pivoted)")
 
+inf_data <- inf_data %>%
+  pivot_longer(cols = -c("Measure code", "AGE_GRP", "SEX", "COUNTRY_REGION"),
+               names_to = "Año",
+               values_to = "Valor")
 inf_data
 ```
 ## Seleccionamos los datos 
