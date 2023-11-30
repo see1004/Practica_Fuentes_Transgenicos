@@ -112,11 +112,17 @@ d_colon_f = rowMeans(d_colon[,c("2015","2016","2017","2018","2019","2020")])
 ```
 Seleccion de la media de los años 2015-2020 en casos de cancer de mama
 ```{r}
-
+media_casos_mama <- d_mama %>%
+  group_by(Pais) %>%
+  summarise(Media_Casos = mean(Valores, na.rm = TRUE))
+media_casos_mama
 ```
 
 Seleccion de la media de los años 2015-2020 en casos de abortos de europa
 ```{r}
-
+media_casos_aborto<- aborto %>%
+  group_by(Pais) %>%
+  summarise(Media_Casos = mean(Valores, na.rm = TRUE))
+media_casos_aborto
 ```
 
