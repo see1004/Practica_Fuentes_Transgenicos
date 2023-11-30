@@ -33,6 +33,7 @@ library(tidyverse)
 library(readxl)
 library(rjson)
 library(tidyjson)
+library(readxl)
 ```
 
 ## Tablas de valores
@@ -45,10 +46,10 @@ aborto <- aborto %>%
     separate(col = 1, into = c("A","ABORT","RT","Pais"), sep = ",") %>%
     mutate(across("2013":"2021", ~na_if(.,":"))) %>%
     mutate(across("2013":"2021", ~as.numeric(.)))
-aborto <- select(aborto,Pais,"2015":"2020")
+aborto <- select(aborto,Pais,"2013":"2021")
 aborto <- aborto %>%
   pivot_longer(
-    cols = "2015":"2020",
+    cols = "2013":"2021",
     names_to = "Año",
     values_to = "Valores"
   )
@@ -63,9 +64,9 @@ d_mama <- read_delim("INPUT/DATA/datos_cancer_mama.tsv",
 d_mama <- d_mama %>% 
   separate(col = 1, into = c("A","PC","PGR","C50","Pais"), sep = ",") %>%
   mutate(across("2000":"2021", ~na_if(.,":")))
-d_mama  <- select(d_mama,Pais,"2015":"2020")
+d_mama  <- select(d_mama,Pais,"2000":"2021")
 d_mama <- d_mama %>%
-  pivot_longer(cols="2015":"2020",
+  pivot_longer(cols="2000":"2021",
                names_to = "Años",
                values_to = "Valores") %>%
   mutate(Valores = as.numeric(gsub("[^0-9.]", "", Valores)))
@@ -74,7 +75,13 @@ d_mama
 
 
 ```{r}
-
+d_isquemia <- read_excel("INPUT/DATA/HFAMDB_427_EN.xlsx", 
+    sheet = "Data (pivoted)")
+d_isquemia <- d_isquemia %>%
+  pivot_longer(cols = -c("Measure code", "AGE_GRP", "SEX", "COUNTRY_REGION"),
+               names_to = "Año",
+               values_to = "Valor")
+d_isquemia
 ```
 
 ```{r}
@@ -83,8 +90,8 @@ d_cultivos <- d_cultivos %>% rename(Pais = "Country ISO2 code" )
 d_cultivos
 ```
 ```{r}
-inf_data <- read_excel("INPUT/DATA/HFAMDB_427_EN.xlsx", sheet = "Data (pivoted)")
-
+inf_data <- read_excel("INPUT/DATA/HFAMDB_427_EN.xlsx", 
+                       sheet = "Data (pivoted)")
 inf_data <- inf_data %>%
   pivot_longer(cols = -c("Measure code", "AGE_GRP", "SEX", "COUNTRY_REGION"),
                names_to = "Año",
@@ -101,28 +108,33 @@ d_cultivos_e <- d_cultivos_e %>% rename(Pepino="cucumberetc")
 d_cultivos_e <- d_cultivos_e %>% rename(Judía_verde="greenbean")
 d_cultivos_e
 ```
-Seleccion de la media de los años 2015-2020 en casos de cardiopatias isquemicas
+Selección de la media de los años 2015-2020 en casos de cardiopatias isquémicas
 ```{r}
-inf_data_e= select(inf_data,2015)
+media_cardiopatias <- d_isquemia %>%
+  filter(Año >= 2015 & Año <= 2020)
+d_isquemia_media <- media_cardiopatias %>%
+  group_by(COUNTRY_REGION) %>%
+  summarise(Valor_Media = mean(Valor, na.rm = TRUE))
+d_isquemia_media
 ```
 
-Seleccion de la media de los años 2015-2020 en casos de cancer de colon
-```{r}
-d_colon_f = rowMeans(d_colon[,c("2015","2016","2017","2018","2019","2020")])
-```
 Seleccion de la media de los años 2015-2020 en casos de cancer de mama
 ```{r}
 media_casos_mama <- d_mama %>%
+  filter(Años >=2015 & Años <=2020)
+casos_mama_media <- media_casos_mama %>%
   group_by(Pais) %>%
-  summarise(Media_Casos = mean(Valores, na.rm = TRUE))
-media_casos_mama
+  summarise(Valor_Media = mean(Valores, na.rm = TRUE))
+casos_mama_media
 ```
 
-Seleccion de la media de los años 2015-2020 en casos de abortos de europa
+Seleccion de la media de los años 2015-2020 en casos de abortos
 ```{r}
 media_casos_aborto<- aborto %>%
+  filter(Año >= 2015 & Año <= 2020)
+aborto_media <- media_casos_aborto %>%
   group_by(Pais) %>%
-  summarise(Media_Casos = mean(Valores, na.rm = TRUE))
-media_casos_aborto
+  summarise(Valor_Media = mean(Valores, na.rm = TRUE))
+aborto_media
 ```
 
