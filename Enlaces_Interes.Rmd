@@ -90,6 +90,7 @@ d_isquemia
 d_cultivos <- read_excel("INPUT/DATA/Table_CROPGRIDS_COU.xlsx")
 d_cultivos <- d_cultivos %>% rename(Pais = "Country ISO2 code" )
 d_cultivos
+
 ```
 ## Seleccionamos los datos 
 
@@ -97,7 +98,10 @@ Selección de los 3 cultivos que vamos a usar
 ```{r}
 d_cultivos_e <- select(d_cultivos,Pais,cauliflower,cucumberetc,greenbean)
 d_cultivos_e <- d_cultivos_e %>% 
-              rename(Pepino="cucumberetc",Judía_verde="greenbean",Coliflor="cauliflower")  
+              rename(Pepino="cucumberetc",Judía_verde="greenbean",Coliflor="cauliflower")
+d_cultivos_e <- d_cultivos_e %>%
+  pivot_longer(cols = -Pais, names_to = "Cultivo", values_to = "Valores")
+
 d_cultivos_e
 ```
 Selección de la media de los años 2015-2020 en casos de cardiopatias isquémicas
