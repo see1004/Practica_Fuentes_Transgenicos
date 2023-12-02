@@ -130,4 +130,18 @@ aborto_media <- aborto %>%
   summarise(Valor_Media = mean(Valores, na.rm = TRUE))
 aborto_media
 ```
+Creamos las tablas con la relación cultivos-enfermedad con cada una de ellas.
+Aborto
+```{r}
+
+```
+Cancer mama
+```{r}
+
+```
+Isquemia
+```{r}
+
+```
+
 
