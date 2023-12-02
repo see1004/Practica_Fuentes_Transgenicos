@@ -156,5 +156,41 @@ Isquemia
 ```{r}
 
 ```
+Creamos las gráficas 
+Aborto - Coliflor
+```{r}
 
+```
+Aborto - Pepino
+```{r}
+
+```
+Aborto - Judía
+```{r}
+
+```
+Cancer - Coliflor 
+```{r}
+
+```
+Cancer - Pepino
+```{r}
+
+```
+Cancer - Judía
+```{r}
+
+```
+Isquemia - Coliflor
+```{r}
+
+```
+Isquemia - Pepino
+```{r}
+
+```
+Isquemia - Judía
+```{r}
+
+```
 
