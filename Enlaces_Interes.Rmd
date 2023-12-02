@@ -133,7 +133,12 @@ aborto_media
 Creamos las tablas con la relación cultivos-enfermedad con cada una de ellas.
 Aborto
 ```{r}
-
+tabla_aborto <- left_join(aborto_media, d_cultivos_e, by = 'Pais')
+tabla_aborto <- tabla_aborto %>%
+  rename(Media_abortos=Valor_Media)
+tabla_aborto <- tabla_aborto %>%
+  rename(Valores_cultivos=Valores)
+tabla_aborto
 ```
 Cancer mama
 ```{r}
