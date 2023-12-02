@@ -138,6 +138,8 @@ tabla_aborto <- tabla_aborto %>%
   rename(Media_abortos=Valor_Media)
 tabla_aborto <- tabla_aborto %>%
   rename(Valores_cultivos=Valores)
+tabla_aborto<-tabla_aborto %>%
+  relocate(Cultivo:Valores_cultivos, .before =Media_abortos)
 tabla_aborto
 ```
 Cancer mama
