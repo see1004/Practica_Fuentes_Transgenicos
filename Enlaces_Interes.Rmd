@@ -34,6 +34,7 @@ library(readxl)
 library(rjson)
 library(tidyjson)
 library(readxl)
+library(ggplot2)
 ```
 
 ## Tablas de valores
