@@ -142,7 +142,12 @@ tabla_aborto
 ```
 Cancer mama
 ```{r}
-
+unif_mama_cult <- casos_mama_media %>%
+  inner_join(., d_cultivos_e) %>%
+  rename (.data = ., Media_Cancer = Valor_Media) %>%
+  rename (.data = ., Hectareas_Cultivadas = Valores) %>%
+  relocate (.data = ., Cultivo:Hectareas_Cultivadas, .before = Media_Cancer)
+unif_mama_cult
 ```
 Isquemia
 ```{r}
