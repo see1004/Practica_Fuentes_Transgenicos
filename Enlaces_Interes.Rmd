@@ -159,11 +159,32 @@ Isquemia
 Creamos las gráficas 
 Aborto - Coliflor
 ```{r}
+coliflor_aborto <- tabla_aborto %>% 
+  filter(Cultivo == "Coliflor")
 
+ggplot(coliflor_aborto, aes(x = Pais)) +
+  geom_col(aes(y = Media_abortos, fill = "Media de Abortos"), position = "dodge", width = 0.7) +
+  geom_col(aes(y = Hectareas_cultivadas * 0.01, fill = "Hectáreas Cultivadas"), position = "dodge", width = 0.4) +
+  labs(title = "Media de abortos y número de hectáreas cultivadas de coliflor por país",
+       x = "País",
+       y = "Valores",
+       fill = "Leyenda") +
+  scale_fill_manual(values = c("Media de Abortos" = "red", "Hectáreas Cultivadas" = "green"))
 ```
+
 Aborto - Pepino
 ```{r}
+pepino_aborto <- tabla_aborto %>% 
+  filter(Cultivo == "Pepino")
 
+ggplot(pepino_aborto, aes(x = Pais)) +
+  geom_col(aes(y = Media_abortos, fill = "Media de Abortos"), position = "dodge", width = 0.7) +
+  geom_col(aes(y = Hectareas_cultivadas * 0.01, fill = "Hectáreas Cultivadas"), position = "dodge", width = 0.4) +
+  labs(title = "Media de abortos y número de hectáreas cultivadas de pepino por país",
+       x = "País",
+       y = "Valores",
+       fill = "Leyenda") +
+  scale_fill_manual(values = c("Media de Abortos" = "red", "Hectáreas Cultivadas" = "green"))
 ```
 Aborto - Judía
 ```{r}
