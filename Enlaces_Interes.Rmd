@@ -171,7 +171,11 @@ Aborto - Judía
 ```
 Cancer - Coliflor 
 ```{r}
-
+filter (unif_mama_cult, Cultivo == "Coliflor") %>%
+  ggplot(data = .) + 
+  geom_point(
+    mapping = aes (x = Pais, y = Hectareas_Cultivadas),
+    colour = "darkgreen")
 ```
 Cancer - Pepino
 ```{r}
