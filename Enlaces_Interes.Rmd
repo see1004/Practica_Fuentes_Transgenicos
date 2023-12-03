@@ -192,19 +192,45 @@ Aborto - Judía
 ```
 Cancer - Coliflor 
 ```{r}
-filter (unif_mama_cult, Cultivo == "Coliflor") %>%
-  ggplot(data = .) + 
-  geom_point(
-    mapping = aes (x = Pais, y = Hectareas_Cultivadas),
-    colour = "darkgreen")
+coliflor_cancer <- unif_mama_cult %>% 
+  filter(Cultivo == "Coliflor")
+
+ggplot(coliflor_cancer, aes(x = Pais)) +
+  geom_col(aes(y = Media_Cancer, fill = "Media de Cancer de mama"), position = "dodge", width = 0.7) +
+  geom_col(aes(y = Hectareas_Cultivadas * 0.01, fill = "Hectáreas Cultivadas"), position = "dodge", width = 0.4) +
+  labs(title = "Media de Cancer de mama y número de hectáreas cultivadas de coliflor por país",
+       x = "País",
+       y = "Valores",
+       fill = "Leyenda") +
+  scale_fill_manual(values = c("Media de Cancer de mama" = "red", "Hectáreas Cultivadas" = "green"))
 ```
 Cancer - Pepino
 ```{r}
+pepino_cancer <- unif_mama_cult %>% 
+  filter(Cultivo == "Pepino")
 
+ggplot(pepino_cancer, aes(x = Pais)) +
+  geom_col(aes(y = Media_Cancer, fill = "Media de Cancer de mama"), position = "dodge", width = 0.7) +
+  geom_col(aes(y = Hectareas_Cultivadas * 0.01, fill = "Hectáreas Cultivadas"), position = "dodge", width = 0.4) +
+  labs(title = "Media de Cancer de mama y número de hectáreas cultivadas de pepino por país",
+       x = "País",
+       y = "Valores",
+       fill = "Leyenda") +
+  scale_fill_manual(values = c("Media de Cancer de mama" = "red", "Hectáreas Cultivadas" = "green"))
 ```
 Cancer - Judía
 ```{r}
+judia_cancer <- unif_mama_cult %>% 
+  filter(Cultivo == "Judía_verde")
 
+ggplot(judia_cancer, aes(x = Pais)) +
+  geom_col(aes(y = Media_Cancer, fill = "Media de Cancer de mama"), position = "dodge", width = 0.7) +
+  geom_col(aes(y = Hectareas_Cultivadas * 0.01, fill = "Hectáreas Cultivadas"), position = "dodge", width = 0.4) +
+  labs(title = "Media de Cancer de mama y número de hectáreas cultivadas de judías verdes por país",
+       x = "País",
+       y = "Valores",
+       fill = "Leyenda") +
+  scale_fill_manual(values = c("Media de Cancer de mama" = "red", "Hectáreas Cultivadas" = "green"))
 ```
 Isquemia - Coliflor
 ```{r}
