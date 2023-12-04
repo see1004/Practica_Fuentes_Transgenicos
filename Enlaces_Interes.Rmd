@@ -193,22 +193,16 @@ ggplot(pepino_aborto, aes(x = Pais)) +
 ```
 Aborto - Judía
 ```{r}
-t_a_coliflor <- filter(tabla_aborto,Cultivo=="Coliflor")
-ggplot(data = t_a_coliflor) + 
-  geom_bar(
-    mapping = aes(x = Pais, y = Hectareas_cultivadas, fill = "Hectareas_cultivadas"), 
-    stat = "identity",
-    position = "dodge",
-    width = 0.7,
-    show.legend = TRUE
-  ) +
-  geom_bar(
-    mapping = aes(x = Pais, y = Media_abortos, fill = "Media_abortos"), 
-    stat = "identity",
-    position = "dodge",
-    width = 0.7,
-    show.legend = TRUE)
- ?stat
+judia_aborto <- tabla_aborto %>% 
+  filter(Cultivo == "Judía_verde")
+ggplot(judia_aborto, aes(x = Pais)) +
+  geom_col(aes(y = Media_abortos, fill = "Media de Abortos"), position = "dodge", width = 0.7) +
+  geom_col(aes(y = Hectareas_cultivadas * 0.01, fill = "Hectáreas Cultivadas"), position = "dodge", width = 0.4) +
+  labs(title = "Media de abortos y número de hectáreas cultivadas de judía verde por país",
+       x = "País",
+       y = "Valores",
+       fill = "Leyenda") +
+  scale_fill_manual(values = c("Media de Abortos" = "red", "Hectáreas Cultivadas" = "green"))
 
 ```
 Cancer - Coliflor 
