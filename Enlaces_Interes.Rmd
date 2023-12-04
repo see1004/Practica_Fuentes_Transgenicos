@@ -97,11 +97,9 @@ d_cultivos
 
 Selección de los 3 cultivos que vamos a usar
 ```{r}
-d_cultivos_e <- select(d_cultivos,Pais,cauliflower,cucumberetc,greenbean)
-d_cultivos_e <- d_cultivos_e %>% 
-              rename(Pepino="cucumberetc",Judía_verde="greenbean",Coliflor="cauliflower")
-d_cultivos_e <- d_cultivos_e %>%
-  pivot_longer(cols = -Pais, names_to = "Cultivo", values_to = "Valores")
+d_cultivos_e <- select(d_cultivos,Pais,cauliflower,cucumberetc,greenbean) %>%
+  rename(Pepino="cucumberetc",Judía_verde="greenbean",Coliflor="cauliflower") %>%
+  pivot_longer(cols = -Pais, names_to = "Cultivo", values_to = "Hectareas_cultivadas")
 
 d_cultivos_e
 ```
@@ -110,7 +108,8 @@ Selección de la media de los años 2015-2020 en casos de cardiopatias isquémic
 d_isquemia_media <- d_isquemia %>%
   filter(Años >= 2015 & Años <= 2020) %>%
   group_by(Pais) %>%
-  summarise(Valor_Media = mean(Valor, na.rm = TRUE))
+  summarise(Valor_Media = mean(Valor, na.rm = TRUE)) %>%
+  rename (., Media_isquemia = Valor_Media)
 d_isquemia_media
 ```
 
@@ -137,8 +136,6 @@ Aborto
 tabla_aborto <- left_join(aborto_media, d_cultivos_e, by = 'Pais')
 tabla_aborto <- tabla_aborto %>%
   rename(Media_abortos=Valor_Media)
-tabla_aborto <- tabla_aborto %>%
-  rename(Hectareas_cultivadas=Valores)
 tabla_aborto<-tabla_aborto %>%
   relocate(Cultivo:Hectareas_cultivadas, .before =Media_abortos)
 tabla_aborto
@@ -148,13 +145,22 @@ Cancer mama
 unif_mama_cult <- casos_mama_media %>%
   inner_join(., d_cultivos_e) %>%
   rename (.data = ., Media_Cancer = Valor_Media) %>%
-  rename (.data = ., Hectareas_Cultivadas = Valores) %>%
-  relocate (.data = ., Cultivo:Hectareas_Cultivadas, .before = Media_Cancer)
+  relocate (.data = ., Cultivo:Hectareas_cultivadas, .before = Media_Cancer)
 unif_mama_cult
 ```
 Isquemia
 ```{r}
-
+paises <- read_excel("INPUT/DATA/HFAMDB_427_EN.xlsx", 
+    sheet = "Countries")
+paises <- select(paises,"ISO 2","ISO 3")
+tabla_isquemia <- d_isquemia_media %>%
+  cross_join(., paises) %>%
+  filter (.,`ISO 3` ==`Pais`) %>% 
+  select(.,'ISO 2', Media_isquemia) %>%
+  rename (., Pais = "ISO 2") %>%
+  inner_join(.,d_cultivos_e) %>%
+  relocate(Cultivo:Hectareas_cultivadas, .before =Media_isquemia)
+tabla_isquemia
 ```
 Creamos las gráficas 
 Aborto - Coliflor
@@ -187,30 +193,116 @@ ggplot(pepino_aborto, aes(x = Pais)) +
 ```
 Aborto - Judía
 ```{r}
+t_a_coliflor <- filter(tabla_aborto,Cultivo=="Coliflor")
+ggplot(data = t_a_coliflor) + 
+  geom_bar(
+    mapping = aes(x = Pais, y = Hectareas_cultivadas, fill = "Hectareas_cultivadas"), 
+    stat = "identity",
+    position = "dodge",
+    width = 0.7,
+    show.legend = TRUE
+  ) +
+  geom_bar(
+    mapping = aes(x = Pais, y = Media_abortos, fill = "Media_abortos"), 
+    stat = "identity",
+    position = "dodge",
+    width = 0.7,
+    show.legend = TRUE)
+ ?stat
 
 ```
 Cancer - Coliflor 
 ```{r}
+coliflor_cancer <- unif_mama_cult %>% 
+  filter(Cultivo == "Coliflor")
 
+ggplot(coliflor_cancer, aes(x = Pais)) +
+  geom_col(aes(y = Media_Cancer, fill = "Media de Cancer de mama"), position = "dodge", width = 0.7) +
+  geom_col(aes(y = Hectareas_Cultivadas * 0.01, fill = "Hectáreas Cultivadas"), position = "dodge", width = 0.4) +
+  labs(title = "Media de Cancer de mama y número de hectáreas cultivadas de coliflor por país",
+       x = "País",
+       y = "Valores",
+       fill = "Leyenda") +
+  scale_fill_manual(values = c("Media de Cancer de mama" = "red", "Hectáreas Cultivadas" = "green"))
 ```
 Cancer - Pepino
 ```{r}
+pepino_cancer <- unif_mama_cult %>% 
+  filter(Cultivo == "Pepino")
 
+ggplot(pepino_cancer, aes(x = Pais)) +
+  geom_col(aes(y = Media_Cancer, fill = "Media de Cancer de mama"), position = "dodge", width = 0.7) +
+  geom_col(aes(y = Hectareas_Cultivadas * 0.01, fill = "Hectáreas Cultivadas"), position = "dodge", width = 0.4) +
+  labs(title = "Media de Cancer de mama y número de hectáreas cultivadas de pepino por país",
+       x = "País",
+       y = "Valores",
+       fill = "Leyenda") +
+  scale_fill_manual(values = c("Media de Cancer de mama" = "red", "Hectáreas Cultivadas" = "green"))
 ```
 Cancer - Judía
 ```{r}
+judia_cancer <- unif_mama_cult %>% 
+  filter(Cultivo == "Judía_verde")
 
+ggplot(judia_cancer, aes(x = Pais)) +
+  geom_col(aes(y = Media_Cancer, fill = "Media de Cancer de mama"), position = "dodge", width = 0.7) +
+  geom_col(aes(y = Hectareas_Cultivadas * 0.01, fill = "Hectáreas Cultivadas"), position = "dodge", width = 0.4) +
+  labs(title = "Media de Cancer de mama y número de hectáreas cultivadas de judías verdes por país",
+       x = "País",
+       y = "Valores",
+       fill = "Leyenda") +
+  scale_fill_manual(values = c("Media de Cancer de mama" = "red", "Hectáreas Cultivadas" = "green"))
 ```
 Isquemia - Coliflor
 ```{r}
-
+t_i_coliflor <- filter(tabla_isquemia,Cultivo=="Coliflor")
+ggplot(data = t_i_coliflor) + 
+  geom_bar(
+    mapping = aes(x = Pais, y = Hectareas_cultivadas, fill = "Hectareas_cultivadas"), 
+    stat = "identity",
+    width = 1
+  ) +
+  geom_bar(
+    mapping = aes(x = Pais, y = Media_isquemia, fill = "Media_isquemia"), 
+    stat = "identity",
+    position = "dodge",
+    width = 1
+  )
 ```
 Isquemia - Pepino
 ```{r}
-
+t_i_pepino <- filter(tabla_isquemia,Cultivo=="Pepino")
+ggplot(data = t_i_pepino) + 
+  geom_bar(
+    mapping = aes(x = Pais, y = Hectareas_cultivadas, fill = "Hectareas_cultivadas"), 
+    stat = "identity",
+    position = "dodge",
+    width = 0.7,
+    show.legend = TRUE
+  ) +
+  geom_bar(
+    mapping = aes(x = Pais, y = Media_isquemia, fill = "Media_isquemia"), 
+    stat = "identity",
+    position = "dodge",
+    width = 0.7,
+    show.legend = TRUE)
 ```
 Isquemia - Judía
 ```{r}
-
+t_i_judia <- filter(tabla_isquemia,Cultivo=="Judía_verde")
+ggplot(data = t_i_judia) + 
+  geom_bar(
+    mapping = aes(x = Pais, y = Hectareas_cultivadas, fill = "Hectareas_cultivadas"), 
+    stat = "identity",
+    position = "dodge",
+    width = 0.7,
+    show.legend = TRUE
+  ) +
+  geom_bar(
+    mapping = aes(x = Pais, y = Media_isquemia, fill = "Media_isquemia"), 
+    stat = "identity",
+    position = "dodge",
+    width = 0.7,
+    show.legend = TRUE)
 ```
 
