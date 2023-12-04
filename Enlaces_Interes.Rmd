@@ -25,7 +25,7 @@ Indice de abortos en Europa: [Here](https://ec.europa.eu/eurostat/databrowser/vi
 
 Cancer de mama : [Here](https://ec.europa.eu/eurostat/databrowser/view/hlth_ps_scre__custom_8587007/default/table?lang=en)
 
-Cardiopatias isquémicas: [Here] (https://gateway.euro.who.int/en/indicators/hfamdb_427-deaths-ischaemic-heart-disease/?id=30289)
+Cardiopatias isquémicas: [Here](https://gateway.euro.who.int/en/indicators/hfamdb_427-deaths-ischaemic-heart-disease/#id=30289)
 
 ## Librerias que importamos para el trabajo
 ```{r}
@@ -284,19 +284,25 @@ ggplot(data = t_i_pepino) +
 Isquemia - Judía
 ```{r}
 t_i_judia <- filter(tabla_isquemia,Cultivo=="Judía_verde")
-ggplot(data = t_i_judia) + 
+ggplot(data = t_i_judia,aes(x = Pais)) + 
   geom_bar(
-    mapping = aes(x = Pais, y = Hectareas_cultivadas, fill = "Hectareas_cultivadas"), 
+    mapping = aes(y = Hectareas_cultivadas, fill = "Hectareas_cultivadas"), 
     stat = "identity",
     position = "dodge",
     width = 0.7,
     show.legend = TRUE
   ) +
   geom_bar(
-    mapping = aes(x = Pais, y = Media_isquemia, fill = "Media_isquemia"), 
+    mapping = aes( y = Media_isquemia, fill = "Media_isquemia" ), 
     stat = "identity",
     position = "dodge",
     width = 0.7,
-    show.legend = TRUE)
+    show.legend = TRUE) +
+  labs(
+    x = "Paises",
+    y = "Valores",
+    title = "Media de Isquemias cardiacas y número de hectareas cultivadas de judías verdes por paises",
+    fill = "Parámetros"
+  )
 ```
 
