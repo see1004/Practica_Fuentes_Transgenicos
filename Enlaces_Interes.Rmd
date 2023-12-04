@@ -42,14 +42,12 @@ library(ggplot2)
 ```{r}
 aborto <- read_delim("INPUT/DATA/datos_aborto.tsv", 
     delim = "\t", escape_double = FALSE, 
-    trim_ws = TRUE)
-aborto <- aborto %>%
+    trim_ws = TRUE) %>%
     separate(col = 1, into = c("A","ABORT","RT","Pais"), sep = ",") %>%
     mutate(across("2013":"2021", ~na_if(.,":"))) %>%
-    mutate(across("2013":"2021", ~as.numeric(.)))
-aborto <- select(aborto,Pais,"2013":"2021")
-aborto <- aborto %>%
-  pivot_longer(
+    mutate(across("2013":"2021", ~as.numeric(.))) %>% 
+    select(.,Pais,"2013":"2021") %>%
+    pivot_longer(
     cols = "2013":"2021",
     names_to = "Años",
     values_to = "Valores"
@@ -61,12 +59,10 @@ aborto
 ```{r}
 d_mama <- read_delim("INPUT/DATA/datos_cancer_mama.tsv", 
     delim = "\t", escape_double = FALSE, 
-    trim_ws = TRUE)
-d_mama <- d_mama %>% 
+    trim_ws = TRUE) %>% 
   separate(col = 1, into = c("A","PC","PGR","C50","Pais"), sep = ",") %>%
-  mutate(across("2000":"2021", ~na_if(.,":")))
-d_mama  <- select(d_mama,Pais,"2000":"2021")
-d_mama <- d_mama %>%
+  mutate(across("2000":"2021", ~na_if(.,":"))) %>% 
+  select(.,Pais,"2000":"2021") %>%
   pivot_longer(cols="2000":"2021",
                names_to = "Años",
                values_to = "Valores") %>%
@@ -77,9 +73,8 @@ d_mama
 
 ```{r}
 d_isquemia <- read_excel("INPUT/DATA/HFAMDB_427_EN.xlsx", 
-    sheet = "Data (pivoted)")
-d_isquemia = select(d_isquemia,COUNTRY_REGION,"2015":"2020")
-d_isquemia <- d_isquemia %>%
+    sheet = "Data (pivoted)") %>%
+  select(.,COUNTRY_REGION,"2015":"2020") %>%
   pivot_longer(cols = -c("COUNTRY_REGION"),
                names_to = "Años",
                values_to = "Valor") %>%
@@ -88,8 +83,8 @@ d_isquemia
 ```
 
 ```{r}
-d_cultivos <- read_excel("INPUT/DATA/Table_CROPGRIDS_COU.xlsx")
-d_cultivos <- d_cultivos %>% rename(Pais = "Country ISO2 code" )
+d_cultivos <- read_excel("INPUT/DATA/Table_CROPGRIDS_COU.xlsx") %>%
+  rename(Pais = "Country ISO2 code" )
 d_cultivos
 
 ```
@@ -113,11 +108,11 @@ casos_mama_media
 ```
 Selección de la media de los años 2015-2020 en casos de cardiopatias isquémicas
 ```{r}
-paises_europeos <- select(casos_mama_media,Pais)
+
 paises <- read_excel("INPUT/DATA/HFAMDB_427_EN.xlsx", 
-    sheet = "Countries")
-paises <- select(paises,"ISO 2","ISO 3") %>%
-  inner_join(.,paises_europeos, by = c("ISO 2" = "Pais"))
+    sheet = "Countries") %>%
+  select(.,"ISO 2","ISO 3") %>%
+  inner_join(.,select(casos_mama_media,Pais), by = c("ISO 2" = "Pais"))
 
 d_isquemia_media <- d_isquemia %>%
   filter(Años >= 2015 & Años <= 2020) %>%
@@ -127,7 +122,8 @@ d_isquemia_media <- d_isquemia %>%
   inner_join(.,paises, by = c("Pais" = "ISO 3")) %>%
   relocate("ISO 2", .before =Media_isquemia) %>%
   select(.,"ISO 2", Media_isquemia) %>%
-  rename(., Pais = "ISO 2")
+  rename(., Pais = "ISO 2") %>%
+  mutate(., Media_isquemia = (Media_isquemia/sum(Media_isquemia)*100))
 d_isquemia_media
 ```
 
@@ -142,10 +138,8 @@ aborto_media
 Creamos las tablas con la relación cultivos-enfermedad con cada una de ellas.
 Aborto
 ```{r}
-tabla_aborto <- left_join(aborto_media, d_cultivos_e, by = 'Pais')
-tabla_aborto <- tabla_aborto %>%
-  rename(Media_abortos=Valor_Media)
-tabla_aborto<-tabla_aborto %>%
+tabla_aborto <- left_join(aborto_media, d_cultivos_e, by = 'Pais') %>%
+  rename(Media_abortos=Valor_Media) %>%
   relocate(Cultivo:Hectareas_cultivadas, .before =Media_abortos)
 tabla_aborto
 ```
@@ -201,8 +195,7 @@ ggplot(data = judia_aborto )+
 ```
 Cancer - Coliflor 
 ```{r}
-t_c_coliflor <- filter(unif_mama_cult,Cultivo=="Coliflor")
-ggplot(data = t_c_coliflor) + 
+fig_c_coliflor <- ggplot(data = filter(unif_mama_cult,Cultivo=="Coliflor")) + 
   geom_smooth(
     mapping = aes (x = Hectareas_cultivadas, y = Media_Cancer),
     method = "lm"
@@ -212,11 +205,11 @@ ggplot(data = t_c_coliflor) +
     y = "Media de Cancer",
     title = "Media de cáncer de mama y número de hectareas cultivadas de coliflor",
   )
+fig_c_coliflor
 ```
 Cancer - Pepino
 ```{r}
-t_c_pepino <- filter(unif_mama_cult,Cultivo=="Pepino")
-ggplot(data = t_c_pepino) + 
+fig_c_pepino <- ggplot(data = filter(unif_mama_cult,Cultivo=="Pepino")) + 
   geom_smooth(
     mapping = aes (x = Hectareas_cultivadas, y = Media_Cancer),
     method = "lm",
@@ -226,11 +219,11 @@ ggplot(data = t_c_pepino) +
     y = "Media de Cancer",
     title = "Media de cáncer de mama y número de hectareas cultivadas de pepino",
   )
+fig_c_pepino
 ```
 Cancer - Judía
 ```{r}
-t_c_judia <- filter(unif_mama_cult,Cultivo=="Judía_verde")
-ggplot(data = t_c_judia) + 
+fig_c_judia <-ggplot(data = filter(unif_mama_cult,Cultivo=="Judía_verde")) + 
   geom_smooth(
     mapping = aes (x = Hectareas_cultivadas, y = Media_Cancer),
     method = "lm"
@@ -240,11 +233,11 @@ ggplot(data = t_c_judia) +
     y = "Media de Cancer",
     title = "Media de cáncer de mama y número de hectareas cultivadas de judías verdes",
   )
+fig_c_judia
 ```
 Isquemia - Coliflor
 ```{r}
-t_i_coliflor <- filter(tabla_isquemia,Cultivo=="Coliflor")
-ggplot(data = t_i_coliflor) + 
+fig_i_coliflor <- ggplot(data = filter(tabla_isquemia,Cultivo=="Coliflor")) + 
   geom_smooth(
     mapping = aes (x = Hectareas_cultivadas, y = Media_isquemia),
     method = "lm"
@@ -254,11 +247,11 @@ ggplot(data = t_i_coliflor) +
     y = "Media de casos de isquemia cardiaca",
     title = "Media de casos de isquemia cardiaca y número de hectareas cultivadas de coliflor",
   )
+fig_i_coliflor
 ```
 Isquemia - Pepino
 ```{r}
-t_i_pepino <- filter(tabla_isquemia,Cultivo=="Pepino")
-fig_i_pepino <- ggplot(data = t_i_pepino) + 
+fig_i_pepino <- ggplot(filter(tabla_isquemia,Cultivo=="Pepino")) + 
   geom_smooth(
     mapping = aes (x = Hectareas_cultivadas, y = Media_isquemia),
     method = "lm"
@@ -272,8 +265,7 @@ fig_i_pepino
 ```
 Isquemia - Judía
 ```{r}
-t_i_judia <- filter(tabla_isquemia,Cultivo=="Judía_verde")
-ggplot(data = t_i_judia) + 
+fig_i_judia <- ggplot(data = filter(tabla_isquemia,Cultivo=="Judía_verde")) + 
   geom_smooth(
     mapping = aes (x = Hectareas_cultivadas, y = Media_isquemia),
     method = "lm"
@@ -283,5 +275,6 @@ ggplot(data = t_i_judia) +
     y = "Media de casos de isquemia",
     title = "Media de casos de isquemia y número de hectareas cultivadas de coliflor",
   )
+fig_i_judia
 ```
 
