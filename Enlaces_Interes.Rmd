@@ -184,7 +184,6 @@ ggplot(pepino_aborto, aes(x = Pais)) +
        y = "Valores",
        fill = "Leyenda") +
   scale_fill_manual(values = c("Media de Abortos" = "red", "Hectáreas Cultivadas" = "green"))
-hola
 ```
 Aborto - Judía
 ```{r}
