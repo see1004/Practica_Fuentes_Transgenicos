@@ -33,7 +33,6 @@ library(tidyverse)
 library(readxl)
 library(rjson)
 library(tidyjson)
-library(readxl)
 library(ggplot2)
 ```
 
@@ -161,36 +160,45 @@ tabla_isquemia
 Creamos las gráficas 
 Aborto - Coliflor
 ```{r}
-coliflor_aborto<- filter(tabla_aborto,Cultivo=="Coliflor")
-ggplot(data = coliflor_aborto,  )+
-  geom_smooth(aes(x = Hectareas_cultivadas, y = Media_abortos)) +
+coliflor_aborto <- filter(tabla_aborto,Cultivo=="Coliflor")
+ggplot(data = pepino_aborto) + 
+  geom_smooth(
+    mapping = aes (x = Hectareas_cultivadas, y = Media_abortos),
+    method = "lm"
+  ) +
   labs(
-    x = "Hectáreas cultivadas",
+    x = "Hectareas Cultivadas",
     y = "Media de abortos",
-    title = "Media de abortos y número de hectáreas cultivadas de coliflor por países"
+    title = "Media de abortos y número de hectareas cultivadas de coliflor",
   )
 ```
 
 Aborto - Pepino
 ```{r}
-pepino_aborto<- filter(tabla_aborto,Cultivo=="Pepino")
-ggplot(data = pepino_aborto )+
-  geom_smooth(aes(x = Hectareas_cultivadas, y = Media_abortos)) +
+pepino_aborto <- filter(tabla_aborto,Cultivo=="Pepino")
+ggplot(data = pepino_aborto) + 
+  geom_smooth(
+    mapping = aes (x = Hectareas_cultivadas, y = Media_abortos),
+    method = "lm"
+  ) +
   labs(
-    x = "Hectáreas cultivadas",
+    x = "Hectareas Cultivadas",
     y = "Media de abortos",
-    title = "Media de abortos y número de hectáreas cultivadas de pepino por países"
+    title = "Media de abortos y número de hectareas cultivadas de pepino",
   )
 ```
 Aborto - Judía
 ```{r}
-judia_aborto<- filter(tabla_aborto,Cultivo=="Judía_verde")
-ggplot(data = judia_aborto )+
-  geom_smooth(aes(x = Hectareas_cultivadas, y = Media_abortos)) +
+judia_aborto <- filter(tabla_aborto,Cultivo=="Judía_verde")
+ggplot(data = judia_aborto) + 
+  geom_smooth(
+    mapping = aes (x = Hectareas_cultivadas, y = Media_abortos),
+    method = "lm"
+  ) +
   labs(
-    x = "Hectáreas cultivadas",
+    x = "Hectareas Cultivadas",
     y = "Media de abortos",
-    title = "Media de abortos y número de hectáreas cultivadas de judia verde por países"
+    title = "Media de abortos y número de hectareas cultivadas de judía verde",
   )
 ```
 Cancer - Coliflor 
