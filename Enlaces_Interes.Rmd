@@ -215,7 +215,8 @@ Cancer - Pepino
 t_c_pepino <- filter(unif_mama_cult,Cultivo=="Pepino")
 ggplot(data = t_c_pepino) + 
   geom_smooth(
-    mapping = aes (x = Hectareas_cultivadas, y = Media_Cancer)
+    mapping = aes (x = Hectareas_cultivadas, y = Media_Cancer),
+    method = "lm",
   ) +
   labs(
     x = "Hectareas Cultivadas",
