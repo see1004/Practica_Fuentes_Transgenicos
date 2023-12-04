@@ -319,6 +319,12 @@ ggplot(data = t_i_coliflor) +
     stat = "identity",
     position = "dodge",
     width = 1
+  ) +
+  labs(
+    x = "Paises",
+    y = "Valores",
+    title = "Media de Isquemias cardiacas y número de hectareas cultivadas de coliflores por paises",
+    fill = "Parámetros"
   )
 ```
 Isquemia - Pepino
@@ -337,7 +343,13 @@ ggplot(data = t_i_pepino) +
     stat = "identity",
     position = "dodge",
     width = 0.7,
-    show.legend = TRUE)
+    show.legend = TRUE) +
+  labs(
+    x = "Paises",
+    y = "Valores",
+    title = "Media de Isquemias cardiacas y número de hectareas cultivadas de pepinos por paises",
+    fill = "Parámetros"
+  )
 ```
 Isquemia - Judía
 ```{r}
