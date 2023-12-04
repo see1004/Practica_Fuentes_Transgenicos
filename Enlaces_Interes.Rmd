@@ -165,45 +165,73 @@ tabla_isquemia
 Creamos las gráficas 
 Aborto - Coliflor
 ```{r}
-coliflor_aborto <- tabla_aborto %>% 
-  filter(Cultivo == "Coliflor")
-
-ggplot(coliflor_aborto, aes(x = Pais)) +
-  geom_col(aes(y = Media_abortos, fill = "Media de Abortos"), position = "dodge", width = 0.7) +
-  geom_col(aes(y = Hectareas_cultivadas * 0.01, fill = "Hectáreas Cultivadas"), position = "dodge", width = 0.4) +
-  labs(title = "Media de abortos y número de hectáreas cultivadas de coliflor por país",
-       x = "País",
-       y = "Valores",
-       fill = "Leyenda") +
-  scale_fill_manual(values = c("Media de Abortos" = "red", "Hectáreas Cultivadas" = "green"))
+coliflor_aborto <- filter(tabla_aborto,Cultivo=="Coliflor")
+ggplot(data = coliflor_aborto,aes(x = Pais)) + 
+  geom_bar(
+    mapping = aes(y = Hectareas_cultivadas*0.01, fill = "Hectareas cultivadas"), 
+    stat = "identity",
+    position = "dodge",
+    width = 0.7,
+    show.legend = TRUE
+  ) +
+  geom_bar(
+    mapping = aes( y = Media_abortos, fill = "Media abortos" ), 
+    stat = "identity",
+    position = "dodge",
+    width = 0.5,
+    show.legend = TRUE) +
+  labs(
+    x = "Paises",
+    y = "Valores",
+    title = "Media de abortos y número de hectareas cultivadas de coliflor por paises",
+    fill = "Parámetros")
 ```
 
 Aborto - Pepino
 ```{r}
-pepino_aborto <- tabla_aborto %>% 
-  filter(Cultivo == "Pepino")
-ggplot(pepino_aborto, aes(x = Pais)) +
-  geom_col(aes(y = Media_abortos, fill = "Media de Abortos"), position = "dodge", width = 0.7) +
-  geom_col(aes(y = Hectareas_cultivadas * 0.01, fill = "Hectáreas Cultivadas"), position = "dodge", width = 0.4) +
-  labs(title = "Media de abortos y número de hectáreas cultivadas de pepino por país",
-       x = "País",
-       y = "Valores",
-       fill = "Leyenda") +
-  scale_fill_manual(values = c("Media de Abortos" = "red", "Hectáreas Cultivadas" = "green"))
+pepino_aborto <- filter(tabla_aborto,Cultivo=="Pepino")
+ggplot(data = coliflor_aborto,aes(x = Pais)) + 
+  geom_bar(
+    mapping = aes(y = Hectareas_cultivadas*0.01, fill = "Hectareas cultivadas"), 
+    stat = "identity",
+    position = "dodge",
+    width = 0.7,
+    show.legend = TRUE
+  ) +
+  geom_bar(
+    mapping = aes( y = Media_abortos, fill = "Media abortos" ), 
+    stat = "identity",
+    position = "dodge",
+    width = 0.5,
+    show.legend = TRUE) +
+  labs(
+    x = "Paises",
+    y = "Valores",
+    title = "Media de abortos y número de hectareas cultivadas de pepino por paises",
+    fill = "Parámetros")
 ```
 Aborto - Judía
 ```{r}
-judia_aborto <- tabla_aborto %>% 
-  filter(Cultivo == "Judía_verde")
-ggplot(judia_aborto, aes(x = Pais)) +
-  geom_col(aes(y = Media_abortos, fill = "Media de Abortos"), position = "dodge", width = 0.7) +
-  geom_col(aes(y = Hectareas_cultivadas * 0.01, fill = "Hectáreas Cultivadas"), position = "dodge", width = 0.4) +
-  labs(title = "Media de abortos y número de hectáreas cultivadas de judía verde por país",
-       x = "País",
-       y = "Valores",
-       fill = "Leyenda") +
-  scale_fill_manual(values = c("Media de Abortos" = "red", "Hectáreas Cultivadas" = "green"))
-
+pepino_aborto <- filter(tabla_aborto,Cultivo=="Judía verde")
+ggplot(data = coliflor_aborto,aes(x = Pais)) + 
+  geom_bar(
+    mapping = aes(y = Hectareas_cultivadas*0.01, fill = "Hectareas cultivadas"), 
+    stat = "identity",
+    position = "dodge",
+    width = 0.7,
+    show.legend = TRUE
+  ) +
+  geom_bar(
+    mapping = aes( y = Media_abortos, fill = "Media abortos" ), 
+    stat = "identity",
+    position = "dodge",
+    width = 0.5,
+    show.legend = TRUE) +
+  labs(
+    x = "Paises",
+    y = "Valores",
+    title = "Media de abortos y número de hectareas cultivadas de judías verdes por paises",
+    fill = "Parámetros")
 ```
 Cancer - Coliflor 
 ```{r}
@@ -296,7 +324,7 @@ ggplot(data = t_i_judia,aes(x = Pais)) +
     mapping = aes( y = Media_isquemia, fill = "Media_isquemia" ), 
     stat = "identity",
     position = "dodge",
-    width = 0.7,
+    width = 0.1,
     show.legend = TRUE) +
   labs(
     x = "Paises",
