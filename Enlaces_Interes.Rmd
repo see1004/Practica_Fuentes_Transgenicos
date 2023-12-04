@@ -207,45 +207,75 @@ ggplot(judia_aborto, aes(x = Pais)) +
 ```
 Cancer - Coliflor 
 ```{r}
-coliflor_cancer <- unif_mama_cult %>% 
-  filter(Cultivo == "Coliflor")
-
-ggplot(coliflor_cancer, aes(x = Pais)) +
-  geom_col(aes(y = Media_Cancer, fill = "Media de Cancer de mama"), position = "dodge", width = 0.7) +
-  geom_col(aes(y = Hectareas_cultivadas * 0.01, fill = "Hectáreas Cultivadas"), position = "dodge", width = 0.4) +
-  labs(title = "Media de Cancer de mama y número de hectáreas cultivadas de coliflor por país",
-       x = "País",
-       y = "Valores",
-       fill = "Leyenda") +
-  scale_fill_manual(values = c("Media de Cancer de mama" = "red", "Hectáreas Cultivadas" = "green"))
+t_c_coliflor <- filter(unif_mama_cult,Cultivo=="Coliflor")
+ggplot(data = t_c_coliflor,aes(x = Pais)) + 
+  geom_bar(
+    mapping = aes(y = Hectareas_cultivadas, fill = "Hectareas_cultivadas"), 
+    stat = "identity",
+    position = "dodge",
+    width = 1,
+    show.legend = TRUE
+  ) +
+  geom_bar(
+    mapping = aes( y = Media_Cancer, fill = "Media_cancer" ), 
+    stat = "identity",
+    position = "dodge",
+    width = 0.7,
+    show.legend = TRUE) +
+  labs(
+    x = "Paises",
+    y = "Valores",
+    title = "Media de cáncer de mama y número de hectareas cultivadas de coliflor por paises",
+    fill = "Parámetros"
+  )
 ```
 Cancer - Pepino
 ```{r}
-pepino_cancer <- unif_mama_cult %>% 
-  filter(Cultivo == "Pepino")
-
-ggplot(pepino_cancer, aes(x = Pais)) +
-  geom_col(aes(y = Media_Cancer, fill = "Media de Cancer de mama"), position = "dodge", width = 0.7) +
-  geom_col(aes(y = Hectareas_cultivadas * 0.01, fill = "Hectáreas Cultivadas"), position = "dodge", width = 0.4) +
-  labs(title = "Media de Cancer de mama y número de hectáreas cultivadas de pepino por país",
-       x = "País",
-       y = "Valores",
-       fill = "Leyenda") +
-  scale_fill_manual(values = c("Media de Cancer de mama" = "red", "Hectáreas Cultivadas" = "green"))
+t_c_pepino <- filter(unif_mama_cult,Cultivo=="Pepino")
+ggplot(data = t_c_pepino,aes(x = Pais)) + 
+  geom_bar(
+    mapping = aes(y = Hectareas_cultivadas, fill = "Hectareas_cultivadas"), 
+    stat = "identity",
+    position = "dodge",
+    width = 1,
+    show.legend = TRUE
+  ) +
+  geom_bar(
+    mapping = aes( y = Media_Cancer, fill = "Media_cancer" ), 
+    stat = "identity",
+    position = "dodge",
+    width = 0.7,
+    show.legend = TRUE) +
+  labs(
+    x = "Paises",
+    y = "Valores",
+    title = "Media de cáncer de mama y número de hectareas cultivadas de pepino por paises",
+    fill = "Parámetros"
+  )
 ```
 Cancer - Judía
 ```{r}
-judia_cancer <- unif_mama_cult %>% 
-  filter(Cultivo == "Judía_verde")
-
-ggplot(judia_cancer, aes(x = Pais)) +
-  geom_col(aes(y = Media_Cancer, fill = "Media de Cancer de mama"), position = "dodge", width = 0.7) +
-  geom_col(aes(y = Hectareas_cultivadas * 0.01, fill = "Hectáreas Cultivadas"), position = "dodge", width = 0.4) +
-  labs(title = "Media de Cancer de mama y número de hectáreas cultivadas de judías verdes por país",
-       x = "País",
-       y = "Valores",
-       fill = "Leyenda") +
-  scale_fill_manual(values = c("Media de Cancer de mama" = "red", "Hectáreas Cultivadas" = "green"))
+t_c_judia <- filter(unif_mama_cult,Cultivo=="Judía_verde")
+ggplot(data = t_c_judia,aes(x = Pais)) + 
+  geom_bar(
+    mapping = aes(y = Hectareas_cultivadas, fill = "Hectareas_cultivadas"), 
+    stat = "identity",
+    position = "dodge",
+    width = 1,
+    show.legend = TRUE
+  ) +
+  geom_bar(
+    mapping = aes( y = Media_Cancer, fill = "Media_cancer" ), 
+    stat = "identity",
+    position = "dodge",
+    width = 0.7,
+    show.legend = TRUE) +
+  labs(
+    x = "Paises",
+    y = "Valores",
+    title = "Media de cáncer de mama y número de hectareas cultivadas de judías verdes por paises",
+    fill = "Parámetros"
+  )
 ```
 Isquemia - Coliflor
 ```{r}
