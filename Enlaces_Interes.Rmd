@@ -202,7 +202,8 @@ Cancer - Coliflor
 t_c_coliflor <- filter(unif_mama_cult,Cultivo=="Coliflor")
 ggplot(data = t_c_coliflor) + 
   geom_smooth(
-    mapping = aes (x = Hectareas_cultivadas, y = Media_Cancer)
+    mapping = aes (x = Hectareas_cultivadas, y = Media_Cancer),
+    method = "lm"
   ) +
   labs(
     x = "Hectareas Cultivadas",
@@ -229,7 +230,8 @@ Cancer - Judía
 t_c_judia <- filter(unif_mama_cult,Cultivo=="Judía_verde")
 ggplot(data = t_c_judia) + 
   geom_smooth(
-    mapping = aes (x = Hectareas_cultivadas, y = Media_Cancer)
+    mapping = aes (x = Hectareas_cultivadas, y = Media_Cancer),
+    method = "lm"
   ) +
   labs(
     x = "Hectareas Cultivadas",
