@@ -165,73 +165,37 @@ tabla_isquemia
 Creamos las gráficas 
 Aborto - Coliflor
 ```{r}
-coliflor_aborto <- filter(tabla_aborto,Cultivo=="Coliflor")
-ggplot(data = coliflor_aborto,aes(x = Pais)) + 
-  geom_bar(
-    mapping = aes(y = Hectareas_cultivadas*0.01, fill = "Hectareas cultivadas"), 
-    stat = "identity",
-    position = "dodge",
-    width = 0.7,
-    show.legend = TRUE
-  ) +
-  geom_bar(
-    mapping = aes( y = Media_abortos, fill = "Media abortos" ), 
-    stat = "identity",
-    position = "dodge",
-    width = 0.5,
-    show.legend = TRUE) +
+coliflor_aborto<- filter(tabla_aborto,Cultivo=="Coliflor")
+ggplot(data = coliflor_aborto,  )+
+  geom_smooth(aes(x = Hectareas_cultivadas, y = Media_abortos)) +
   labs(
-    x = "Paises",
-    y = "Valores",
-    title = "Media de abortos y número de hectareas cultivadas de coliflor por paises",
-    fill = "Parámetros")
+    x = "Hectáreas cultivadas",
+    y = "Media de abortos",
+    title = "Media de abortos y número de hectáreas cultivadas de coliflor por países"
+  )
 ```
 
 Aborto - Pepino
 ```{r}
-pepino_aborto <- filter(tabla_aborto,Cultivo=="Pepino")
-ggplot(data = coliflor_aborto,aes(x = Pais)) + 
-  geom_bar(
-    mapping = aes(y = Hectareas_cultivadas*0.01, fill = "Hectareas cultivadas"), 
-    stat = "identity",
-    position = "dodge",
-    width = 0.7,
-    show.legend = TRUE
-  ) +
-  geom_bar(
-    mapping = aes( y = Media_abortos, fill = "Media abortos" ), 
-    stat = "identity",
-    position = "dodge",
-    width = 0.5,
-    show.legend = TRUE) +
+pepino_aborto<- filter(tabla_aborto,Cultivo=="Pepino")
+ggplot(data = pepino_aborto )+
+  geom_smooth(aes(x = Hectareas_cultivadas, y = Media_abortos)) +
   labs(
-    x = "Paises",
-    y = "Valores",
-    title = "Media de abortos y número de hectareas cultivadas de pepino por paises",
-    fill = "Parámetros")
+    x = "Hectáreas cultivadas",
+    y = "Media de abortos",
+    title = "Media de abortos y número de hectáreas cultivadas de pepino por países"
+  )
 ```
 Aborto - Judía
 ```{r}
-pepino_aborto <- filter(tabla_aborto,Cultivo=="Judía verde")
-ggplot(data = coliflor_aborto,aes(x = Pais)) + 
-  geom_bar(
-    mapping = aes(y = Hectareas_cultivadas*0.01, fill = "Hectareas cultivadas"), 
-    stat = "identity",
-    position = "dodge",
-    width = 0.7,
-    show.legend = TRUE
-  ) +
-  geom_bar(
-    mapping = aes( y = Media_abortos, fill = "Media abortos" ), 
-    stat = "identity",
-    position = "dodge",
-    width = 0.5,
-    show.legend = TRUE) +
+judia_aborto<- filter(tabla_aborto,Cultivo=="Judía_verde")
+ggplot(data = judia_aborto )+
+  geom_smooth(aes(x = Hectareas_cultivadas, y = Media_abortos)) +
   labs(
-    x = "Paises",
-    y = "Valores",
-    title = "Media de abortos y número de hectareas cultivadas de judías verdes por paises",
-    fill = "Parámetros")
+    x = "Hectáreas cultivadas",
+    y = "Media de abortos",
+    title = "Media de abortos y número de hectáreas cultivadas de judia verde por países"
+  )
 ```
 Cancer - Coliflor 
 ```{r}
