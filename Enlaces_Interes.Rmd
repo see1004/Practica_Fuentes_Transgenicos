@@ -212,7 +212,7 @@ coliflor_cancer <- unif_mama_cult %>%
 
 ggplot(coliflor_cancer, aes(x = Pais)) +
   geom_col(aes(y = Media_Cancer, fill = "Media de Cancer de mama"), position = "dodge", width = 0.7) +
-  geom_col(aes(y = Hectareas_Cultivadas * 0.01, fill = "Hectáreas Cultivadas"), position = "dodge", width = 0.4) +
+  geom_col(aes(y = Hectareas_cultivadas * 0.01, fill = "Hectáreas Cultivadas"), position = "dodge", width = 0.4) +
   labs(title = "Media de Cancer de mama y número de hectáreas cultivadas de coliflor por país",
        x = "País",
        y = "Valores",
@@ -226,7 +226,7 @@ pepino_cancer <- unif_mama_cult %>%
 
 ggplot(pepino_cancer, aes(x = Pais)) +
   geom_col(aes(y = Media_Cancer, fill = "Media de Cancer de mama"), position = "dodge", width = 0.7) +
-  geom_col(aes(y = Hectareas_Cultivadas * 0.01, fill = "Hectáreas Cultivadas"), position = "dodge", width = 0.4) +
+  geom_col(aes(y = Hectareas_cultivadas * 0.01, fill = "Hectáreas Cultivadas"), position = "dodge", width = 0.4) +
   labs(title = "Media de Cancer de mama y número de hectáreas cultivadas de pepino por país",
        x = "País",
        y = "Valores",
@@ -240,7 +240,7 @@ judia_cancer <- unif_mama_cult %>%
 
 ggplot(judia_cancer, aes(x = Pais)) +
   geom_col(aes(y = Media_Cancer, fill = "Media de Cancer de mama"), position = "dodge", width = 0.7) +
-  geom_col(aes(y = Hectareas_Cultivadas * 0.01, fill = "Hectáreas Cultivadas"), position = "dodge", width = 0.4) +
+  geom_col(aes(y = Hectareas_cultivadas * 0.01, fill = "Hectáreas Cultivadas"), position = "dodge", width = 0.4) +
   labs(title = "Media de Cancer de mama y número de hectáreas cultivadas de judías verdes por país",
        x = "País",
        y = "Valores",
