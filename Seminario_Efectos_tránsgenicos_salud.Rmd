@@ -1,7 +1,15 @@
 ---
-title: "Objetivo General"
+title: "Efectos del consumo de transgénicos en la salud"
+subtitle: |
+  Fuentes de datos Biomédicas y Web semántica
+  
+  Grado de Ingeniería de la Salud
+  
+  
 author: "Samuel Espiño, Lucía Gil, Alvar Tomás Ortiz"
+
 date: "`r Sys.Date()`"
+
 output: html_document
 ---
 
@@ -9,34 +17,45 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Objetivos específicos: 
+## 1. Introducción
 
- Relación de disminución de enfermedades por cultivos trangénicos
+  En este estudio, se pretende conocer que relación existe entre los cultivos transgénicos con los siguientes temas: cancer de Mama, isquemia cadiaca y abortos.
+  
+## 2. Objetivo específicos: 
+  
+  Se plantea relacionar los siguientes puntos con tres cultivos que hemos seleccionado para relacionar:
+  
+  1. Aborto
+  2. Cancer de Mama 
+  3. Isquemia cardiaca
 
-## Enlaces de bases de datos relacionados con el tema
 
-Conjunto de datos globales georreferenciado de 173 cultivos alrededor de 2020: [Here](https://figshare.com/articles/dataset/CROPGRIDS/22491997?file=41952177)
+## 3. Tratamiento de datos
 
-Insuficiencia cardiaca: [Here](https://ec.europa.eu/eurostat/databrowser/view/hlth_ehis_pa2u/default/table?lang=en)
 
-Cancer de colon: [Here](https://ec.europa.eu/eurostat/databrowser/view/hlth_ehis_pa5u/default/table?lang=en)
-
-Indice de abortos en Europa: [Here](https://ec.europa.eu/eurostat/databrowser/view/demo_fabortind/default/table?lang=en) 
-
-Cancer de mama : [Here](https://ec.europa.eu/eurostat/databrowser/view/hlth_ps_scre__custom_8587007/default/table?lang=en)
-
-Cardiopatias isquémicas: [Here](https://gateway.euro.who.int/en/indicators/hfamdb_427-deaths-ischaemic-heart-disease/#id=30289)
-
-## Librerias que importamos para el trabajo
+## 3.1.  Librerias que importamos para el trabajo
 ```{r}
 library(tidyverse)
 library(readxl)
-library(rjson)
 library(tidyjson)
 library(ggplot2)
 ```
 
-## Tablas de valores
+## 3.2. Importamos las tablas 
+
+Los archivos importados en este proyecto se encuentran descargados en la carpeta "DATA" en la que  los datos de casos de abortos y cancer de mama son archivos .tsv y los casos de isquemia y los datos de los cultivos se encuentran en archivos .xlsx .
+
+- Tabla de cultivos a nivel global
+
+```{r}
+d_cultivos <- read_excel("INPUT/DATA/datos_cultivos.xlsx") %>%
+  rename(Pais = "Country ISO2 code" )
+d_cultivos
+
+```
+Renombramos la tabla "Country ISO2 code" a "Pais" para facilitar la selección
+
+- Tabla de abortos a nivel europeo
 
 ```{r}
 aborto <- read_delim("INPUT/DATA/datos_aborto.tsv", 
@@ -45,7 +64,7 @@ aborto <- read_delim("INPUT/DATA/datos_aborto.tsv",
     separate(col = 1, into = c("A","ABORT","RT","Pais"), sep = ",") %>%
     mutate(across("2013":"2021", ~na_if(.,":"))) %>%
     mutate(across("2013":"2021", ~as.numeric(.))) %>% 
-    select(.,Pais,"2013":"2021") %>%
+    select(.,Pais:"2021") %>%
     pivot_longer(
     cols = "2013":"2021",
     names_to = "Años",
@@ -54,6 +73,7 @@ aborto <- read_delim("INPUT/DATA/datos_aborto.tsv",
 aborto
 ```
 
+- Tabla de cancer de Mama a nivel europeo
 
 ```{r}
 d_mama <- read_delim("INPUT/DATA/datos_cancer_mama.tsv", 
@@ -61,7 +81,7 @@ d_mama <- read_delim("INPUT/DATA/datos_cancer_mama.tsv",
     trim_ws = TRUE) %>% 
   separate(col = 1, into = c("A","PC","PGR","C50","Pais"), sep = ",") %>%
   mutate(across("2000":"2021", ~na_if(.,":"))) %>% 
-  select(.,Pais,"2000":"2021") %>%
+  select(.,Pais:"2021") %>%
   pivot_longer(cols="2000":"2021",
                names_to = "Años",
                values_to = "Valores") %>%
@@ -69,27 +89,24 @@ d_mama <- read_delim("INPUT/DATA/datos_cancer_mama.tsv",
 d_mama
 ```
 
+- Tabla de Isquemias cardiacas a nivel mundial
 
 ```{r}
-d_isquemia <- read_excel("INPUT/DATA/HFAMDB_427_EN.xlsx", 
+d_isquemia <- read_excel("INPUT/DATA/datos_isquemias.xlsx", 
     sheet = "Data (pivoted)") %>%
-  select(.,COUNTRY_REGION,"2015":"2020") %>%
+  select(.,COUNTRY_REGION:"2020") %>%
   pivot_longer(cols = -c("COUNTRY_REGION"),
                names_to = "Años",
                values_to = "Valor") %>%
   rename(.,Pais=COUNTRY_REGION)
 d_isquemia
 ```
+ Tratamos la tabla para que salga en tres columnas, siendo el pais, el año y el valor de ese año de isquemia, esto lo hacemos para que resulte mas facil la selección de datos.
 
-```{r}
-d_cultivos <- read_excel("INPUT/DATA/Table_CROPGRIDS_COU.xlsx") %>%
-  rename(Pais = "Country ISO2 code" )
-d_cultivos
+## 3.3. Seleccionamos los datos 
 
-```
-## Seleccionamos los datos 
+- Selección de los 3 cultivos que vamos a usar para buscar la relación
 
-Selección de los 3 cultivos que vamos a usar
 ```{r}
 d_cultivos_e <- select(d_cultivos,Pais,cauliflower,cucumberetc,greenbean) %>%
   rename(Pepino="cucumberetc",Judía_verde="greenbean",Coliflor="cauliflower") %>%
@@ -97,7 +114,21 @@ d_cultivos_e <- select(d_cultivos,Pais,cauliflower,cucumberetc,greenbean) %>%
 
 d_cultivos_e
 ```
-Seleccion de la media de los años 2015-2020 en casos de cancer de mama
+
+Seleccionamos los tres cultivos con los que vamos a trabajar y modificamos la tabla a tres columnas(Pais,Cultivo y hectarias_cultivadas) para que la selección de datos sea mas facil.
+
+- Seleccion de la media de los años 2015-2020 en casos de abortos a nivel europeo
+
+```{r}
+aborto_media <- aborto %>%
+  filter(Años >= 2015 & Años <= 2020) %>%
+  group_by(Pais) %>%
+  summarise(Valor_Media = mean(Valores, na.rm = TRUE))
+aborto_media
+```
+
+- Selección de la media de los años 2015-2020 en casos de cancer de mama a nivel europeo
+
 ```{r}
 casos_mama_media <- d_mama %>%
   filter(Años >= 2015 & Años <= 2020) %>%
@@ -105,10 +136,12 @@ casos_mama_media <- d_mama %>%
   summarise(Valor_Media = mean(Valores, na.rm = TRUE)) 
 casos_mama_media
 ```
-Selección de la media de los años 2015-2020 en casos de cardiopatias isquémicas
+
+- Selección de la media de los años 2015-2020 en casos de cardiopatias isquémicas a nivel europeo
+
 ```{r}
 
-paises <- read_excel("INPUT/DATA/HFAMDB_427_EN.xlsx", 
+paises <- read_excel("INPUT/DATA/datos_isquemias.xlsx", 
     sheet = "Countries") %>%
   select(.,"ISO 2","ISO 3") %>%
   inner_join(.,select(casos_mama_media,Pais), by = c("ISO 2" = "Pais"))
@@ -126,23 +159,23 @@ d_isquemia_media <- d_isquemia %>%
 d_isquemia_media
 ```
 
-Seleccion de la media de los años 2015-2020 en casos de abortos
-```{r}
-aborto_media <- aborto %>%
-  filter(Años >= 2015 & Años <= 2020) %>%
-  group_by(Pais) %>%
-  summarise(Valor_Media = mean(Valores, na.rm = TRUE))
-aborto_media
-```
-Creamos las tablas con la relación cultivos-enfermedad con cada una de ellas.
-Aborto
+Seleccionamos solo los datos de los paises europeos y la media entre los años 2015-2020 y renombramos las columnas de interés.
+
+## 3.4. Relación de los datos con los cultivos
+
+Creamos las tablas cohesionadas con la relación cultivos-enfermedad para que nos permita un mejor manejo de la información y renombramos las columnas para trabajar con los datos mejor
+
+- Aborto
+
 ```{r}
 tabla_aborto <- left_join(aborto_media, d_cultivos_e, by = 'Pais') %>%
   rename(Media_abortos=Valor_Media) %>%
   relocate(Cultivo:Hectareas_cultivadas, .before =Media_abortos)
 tabla_aborto
 ```
-Cancer mama
+
+- Cancer mama
+
 ```{r}
 unif_mama_cult <- casos_mama_media %>%
   inner_join(., d_cultivos_e) %>%
@@ -150,18 +183,24 @@ unif_mama_cult <- casos_mama_media %>%
   relocate (.data = ., Cultivo:Hectareas_cultivadas, .before = Media_Cancer)
 unif_mama_cult
 ```
-Isquemia
+
+- Isquemias cardiacas
+
 ```{r}
 tabla_isquemia <- d_isquemia_media %>%
   inner_join(.,d_cultivos_e) %>%
   relocate(Cultivo:Hectareas_cultivadas, .before =Media_isquemia) 
 tabla_isquemia
 ```
-Creamos las gráficas 
-Aborto - Coliflor
+
+## 3.4. Desarrollo de gráficas de las relaciones
+
+Crearemos las graficas con las relaciones cultivos-enfermedad para evaluar el impacto de los cultivos de cada pais con la tasa a nivel europeo para estudair las posibles relaciones.
+
+- Aborto - Coliflor
+
 ```{r}
-coliflor_aborto <- filter(tabla_aborto,Cultivo=="Coliflor")
-ggplot(data = pepino_aborto) + 
+fig_a_coliflor <-ggplot(data = filter(tabla_aborto,Cultivo=="Coliflor")) + 
   geom_smooth(
     mapping = aes (x = Hectareas_cultivadas, y = Media_abortos),
     method = "lm"
@@ -171,12 +210,13 @@ ggplot(data = pepino_aborto) +
     y = "Media de abortos",
     title = "Media de abortos y número de hectareas cultivadas de coliflor",
   )
+fig_a_coliflor
 ```
 
-Aborto - Pepino
+- Aborto - Pepino
+
 ```{r}
-pepino_aborto <- filter(tabla_aborto,Cultivo=="Pepino")
-ggplot(data = pepino_aborto) + 
+fig_a_pepino <- ggplot(data = filter(tabla_aborto,Cultivo=="Pepino")) + 
   geom_smooth(
     mapping = aes (x = Hectareas_cultivadas, y = Media_abortos),
     method = "lm"
@@ -186,11 +226,12 @@ ggplot(data = pepino_aborto) +
     y = "Media de abortos",
     title = "Media de abortos y número de hectareas cultivadas de pepino",
   )
+fig_a_pepino
 ```
-Aborto - Judía
+- Aborto - Judía
+
 ```{r}
-judia_aborto <- filter(tabla_aborto,Cultivo=="Judía_verde")
-ggplot(data = judia_aborto) + 
+fig_a_judia <- ggplot(data = filter(tabla_aborto,Cultivo=="Judía_verde")) + 
   geom_smooth(
     mapping = aes (x = Hectareas_cultivadas, y = Media_abortos),
     method = "lm"
@@ -200,8 +241,10 @@ ggplot(data = judia_aborto) +
     y = "Media de abortos",
     title = "Media de abortos y número de hectareas cultivadas de judía verde",
   )
+fig_a_judia
 ```
-Cancer - Coliflor 
+- Cancer - Coliflor 
+
 ```{r}
 fig_c_coliflor <- ggplot(data = filter(unif_mama_cult,Cultivo=="Coliflor")) + 
   geom_smooth(
@@ -215,7 +258,8 @@ fig_c_coliflor <- ggplot(data = filter(unif_mama_cult,Cultivo=="Coliflor")) +
   )
 fig_c_coliflor
 ```
-Cancer - Pepino
+- Cancer - Pepino
+
 ```{r}
 fig_c_pepino <- ggplot(data = filter(unif_mama_cult,Cultivo=="Pepino")) + 
   geom_smooth(
@@ -229,7 +273,8 @@ fig_c_pepino <- ggplot(data = filter(unif_mama_cult,Cultivo=="Pepino")) +
   )
 fig_c_pepino
 ```
-Cancer - Judía
+- Cancer - Judía
+
 ```{r}
 fig_c_judia <-ggplot(data = filter(unif_mama_cult,Cultivo=="Judía_verde")) + 
   geom_smooth(
@@ -243,7 +288,8 @@ fig_c_judia <-ggplot(data = filter(unif_mama_cult,Cultivo=="Judía_verde")) +
   )
 fig_c_judia
 ```
-Isquemia - Coliflor
+- Isquemia - Coliflor
+
 ```{r}
 fig_i_coliflor <- ggplot(data = filter(tabla_isquemia,Cultivo=="Coliflor")) + 
   geom_smooth(
@@ -257,7 +303,8 @@ fig_i_coliflor <- ggplot(data = filter(tabla_isquemia,Cultivo=="Coliflor")) +
   )
 fig_i_coliflor
 ```
-Isquemia - Pepino
+- Isquemia - Pepino
+
 ```{r}
 fig_i_pepino <- ggplot(filter(tabla_isquemia,Cultivo=="Pepino")) + 
   geom_smooth(
@@ -271,7 +318,8 @@ fig_i_pepino <- ggplot(filter(tabla_isquemia,Cultivo=="Pepino")) +
   )
 fig_i_pepino
 ```
-Isquemia - Judía
+- Isquemia - Judía
+
 ```{r}
 fig_i_judia <- ggplot(data = filter(tabla_isquemia,Cultivo=="Judía_verde")) + 
   geom_smooth(
@@ -285,4 +333,37 @@ fig_i_judia <- ggplot(data = filter(tabla_isquemia,Cultivo=="Judía_verde")) +
   )
 fig_i_judia
 ```
+## 4. Conclusiones
 
+  Realizamos el análisis de los datos obtenidos de las graficas con dad una de las enfermedades:
+  
+  - **Aborto**
+  jasbfnpkauñs
+  
+  
+  
+  
+  - **Cancer de Mama**
+  laslnfpesaf
+  
+  
+  
+  
+  - **Isquemias cardiacas**
+  lkj
+  
+  
+  
+  
+
+## 5. Bibliografía
+
+- Conjunto de datos globales georreferenciado de 173 cultivos alrededor de 2020: [Here](https://figshare.com/articles/dataset/CROPGRIDS/22491997?file=41952177)
+
+- Insuficiencia cardiaca: [Here](https://ec.europa.eu/eurostat/databrowser/view/hlth_ehis_pa2u/default/table?lang=en)
+
+- Indice de abortos en Europa: [Here](https://ec.europa.eu/eurostat/databrowser/view/demo_fabortind/default/table?lang=en) 
+
+- Cancer de mama : [Here](https://ec.europa.eu/eurostat/databrowser/view/hlth_ps_scre__custom_8587007/default/table?lang=en)
+
+- Cardiopatias isquémicas: [Here](https://gateway.euro.who.int/en/indicators/hfamdb_427-deaths-ischaemic-heart-disease/#id=30289)
