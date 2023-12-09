@@ -19,14 +19,14 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## 1. Introducción
 
-  En este estudio, se pretende conocer que relación existe entre los cultivos transgénicos con los siguientes temas: cancer de Mama, isquemia cadiaca y abortos.
+  En este estudio, se pretende conocer que relación existe entre los cultivos transgénicos con los siguientes temas: cancer de mama, isquemia cadiaca y abortos.
   
 ## 2. Objetivo específicos: 
   
   Se plantea relacionar los siguientes puntos con tres cultivos que hemos seleccionado para relacionar:
   
   1. **Aborto**
-  
+  No existe ningún tipo de evidencia cientifica que relacione el consumo de coliflor, pepino o judía verde con la tasa de aborto, por ello hemos escogido este factor como muestra control, para comparar su nulo efecto con el impacto en otras patologías.
   2. **Cancer de Mama**
   
   3. **Isquemia cardiaca** 
@@ -338,13 +338,11 @@ fig_i_judia
 ```
 ## 4. Conclusiones
 
-  Realizamos el análisis de los datos obtenidos de las graficas con dad una de las enfermedades:
+  Realizamos el análisis de los datos obtenidos de las graficas con cada una de las enfermedades:
   
   - **Aborto**
-  jasbfnpkauñs
-  
-  
-  
+  Como se ha mencionado al inicio, tomamos el aborto como una muestra control no esperando encontrar ningún tipo de relación entre ambos factores.Para nuestra sorpresa observamos que los datos parecen estar relacionados viéndose en las tres gráficas, aun que especialmente en la de coliflor, que el número de abortos desciende a mayor número de hectareas cultivadas.
+  A pesar de esto, debemos considerar que es una cuestión de simple azar, ya que no es una relación con sentido.
   
   - **Cancer de Mama**
   laslnfpesaf
