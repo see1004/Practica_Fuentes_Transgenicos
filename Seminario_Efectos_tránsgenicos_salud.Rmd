@@ -25,9 +25,12 @@ knitr::opts_chunk$set(echo = TRUE)
   
   Se plantea relacionar los siguientes puntos con tres cultivos que hemos seleccionado para relacionar:
   
-  1. Aborto
-  2. Cancer de Mama 
-  3. Isquemia cardiaca
+  1. **Aborto**
+  
+  2. **Cancer de Mama**
+  
+  3. **Isquemia cardiaca** 
+  La coliflor, el pepino y la judía verde son alimentos ricos en fibra, vitaminas, minerales y antioxidantes que  contribuyen a la reducción del colesterol, la presión arterial, la inflamación y el estrés oxidativo, que son factores de riesgo que producen la isquemia cardiaca, por lo que queremos investigar si existe una relación en los paises en los que se cultivan estos cultivos con la isquemia cardiaca
 
 
 ## 3. Tratamiento de datos
@@ -350,10 +353,7 @@ fig_i_judia
   
   
   - **Isquemias cardiacas**
-  lkj
-  
-  
-  
+  Se puede observar que el resultado de los tres cultivos no ha dado la relación que esperabamos, sino que incluso ha salido a la inversa. Estos resultados al no ser plausibles nos indican que no existe una relación entre ellos.
   
 
 ## 5. Bibliografía
