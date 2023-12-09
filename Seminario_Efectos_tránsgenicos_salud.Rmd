@@ -91,6 +91,7 @@ d_mama <- read_delim("INPUT/DATA/datos_cancer_mama.tsv",
   mutate(Valores = as.numeric(gsub("[^0-9.]", "", Valores)))
 d_mama
 ```
+Tratamos los datos para obtener tres columnas, una con el país del que hablamos, otra del año de la medición y otra con el valor correspondiente de casos de cáncer de mama (en porcentaje).
 
 - Tabla de Isquemias cardiacas a nivel mundial
 
@@ -139,6 +140,8 @@ casos_mama_media <- d_mama %>%
   summarise(Valor_Media = mean(Valores, na.rm = TRUE)) 
 casos_mama_media
 ```
+Seleccionamos las medias de los años para obtener para cada país un único valor de cáncer de mama.
+
 
 - Selección de la media de los años 2015-2020 en casos de cardiopatias isquémicas a nivel europeo
 
@@ -345,7 +348,8 @@ fig_i_judia
   A pesar de esto, debemos considerar que es una cuestión de simple azar, ya que no es una relación con sentido.
   
   - **Cancer de Mama**
-  laslnfpesaf
+  Podemos observar que los diferentes cultivos han demostrado diferentes comportamientos. En el caso de la coliflor tenemos unos reaultados que nos indican que en países con un mayor cultivo de coliflores transgénicas obtenemos un índice de cáncer de mama superior. En el caso del pepino y las judías verdes podemos observar que el ratio de cáncer de mama se reduce con el cultivo de estos productos transgénicos hasta más de la mitad. 
+  Esta relación concuerda con nuestros objetivos y las premisas teóricas por lo que podemos considerar que la producción y consumo de pepino y judías verdes transgénicas reduce la tasa de cáncer de mama del país.
   
   
   
