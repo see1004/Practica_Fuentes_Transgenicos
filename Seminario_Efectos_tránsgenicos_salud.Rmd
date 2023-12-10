@@ -25,18 +25,18 @@ knitr::opts_chunk$set(echo = TRUE)
   
   Se plantea relacionar los siguientes puntos con tres cultivos que hemos seleccionado para relacionar:
   
-  1. **Aborto**
+  1. **Aborto:**
   No existe ningún tipo de evidencia cientifica que relacione el consumo de coliflor, pepino o judía verde con la tasa de aborto, por ello hemos escogido este factor como muestra control, para comparar su nulo efecto con el impacto en otras patologías.
-  2. **Cancer de Mama**
+  2. **Cancer de Mama:**
   El desarrollo de cáncer de mama viene dado por múltiples factores, algunos de ellos corespondientes con componentes genéticos y otros relacionados con la dieta. Está demostrado que una dieta rica en frutas y verduras ayuda la prevención del cáncer de mama. En relación a esta dieta, queremos comprobar si el cultivo de productos transgénicos diseñados para que tengan unas propiedades más saludables dietéticamente influyen o no en el desarrollo de esta enfermedad y si lo hacen de forma positiva.
-  3. **Isquemia cardiaca** 
+  3. **Isquemia cardiaca:** 
   La coliflor, el pepino y la judía verde son alimentos ricos en fibra, vitaminas, minerales y antioxidantes que  contribuyen a la reducción del colesterol, la presión arterial, la inflamación y el estrés oxidativo, que son factores de riesgo que producen la isquemia cardiaca, por lo que queremos investigar si existe una relación en los paises en los que se cultivan estos cultivos con la isquemia cardiaca
 
 
 ## 3. Tratamiento de datos
 
 
-## 3.1.  Librerias que importamos para el trabajo
+### 3.1.  Librerias que importamos para el trabajo
 ```{r}
 library(tidyverse)
 library(readxl)
@@ -44,7 +44,7 @@ library(tidyjson)
 library(ggplot2)
 ```
 
-## 3.2. Importamos las tablas 
+### 3.2. Importamos las tablas 
 
 Los archivos importados en este proyecto se encuentran descargados en la carpeta "DATA" en la que  los datos de casos de abortos y cancer de mama son archivos .tsv y los casos de isquemia y los datos de los cultivos se encuentran en archivos .xlsx .
 
@@ -107,7 +107,7 @@ d_isquemia
 ```
  Tratamos la tabla para que salga en tres columnas, siendo el pais, el año y el valor de ese año de isquemia, esto lo hacemos para que resulte mas facil la selección de datos.
 
-## 3.3. Seleccionamos los datos 
+### 3.3. Seleccionamos los datos 
 
 - Selección de los 3 cultivos que vamos a usar para buscar la relación
 
@@ -165,9 +165,9 @@ d_isquemia_media <- d_isquemia %>%
 d_isquemia_media
 ```
 
-Seleccionamos solo los datos de los paises europeos y la media entre los años 2015-2020 y renombramos las columnas de interés.
+Seleccionamos solo los datos de los paises europeos y la media entre los años 2015-2020 y renombramos las columnas de interés, también calculamos los valores de cada pais por porcentaje.
 
-## 3.4. Relación de los datos con los cultivos
+### 3.4. Relación de los datos con los cultivos
 
 Creamos las tablas cohesionadas con la relación cultivos-enfermedad para que nos permita un mejor manejo de la información y renombramos las columnas para trabajar con los datos mejor
 
@@ -199,9 +199,9 @@ tabla_isquemia <- d_isquemia_media %>%
 tabla_isquemia
 ```
 
-## 3.4. Desarrollo de gráficas de las relaciones
+### 3.5. Desarrollo de gráficas de las relaciones
 
-Crearemos las graficas con las relaciones cultivos-enfermedad para evaluar el impacto de los cultivos de cada pais con la tasa a nivel europeo para estudair las posibles relaciones.
+Crearemos las graficas con las relaciones cultivos-enfermedad para evaluar el impacto de los cultivos de cada pais con la tasa a nivel europeo para estudiar las posibles relaciones.
 
 - Aborto - Coliflor
 
@@ -341,21 +341,18 @@ fig_i_judia
 ```
 ## 4. Conclusiones
 
-  Realizamos el análisis de los datos obtenidos de las graficas con cada una de las enfermedades:
+  Realizamos el análisis de los datos obtenidos de las gráficas con cada una de las enfermedades:
   
-  - **Aborto**
+  - **Aborto:**
   Como se ha mencionado al inicio, tomamos el aborto como una muestra control no esperando encontrar ningún tipo de relación entre ambos factores.Para nuestra sorpresa observamos que los datos parecen estar relacionados viéndose en las tres gráficas, aun que especialmente en la de coliflor, que el número de abortos desciende a mayor número de hectareas cultivadas.
   A pesar de esto, debemos considerar que es una cuestión de simple azar, ya que no es una relación con sentido.
   
-  - **Cancer de Mama**
-  Podemos observar que los diferentes cultivos han demostrado diferentes comportamientos. En el caso de la coliflor tenemos unos reaultados que nos indican que en países con un mayor cultivo de coliflores transgénicas obtenemos un índice de cáncer de mama superior. En el caso del pepino y las judías verdes podemos observar que el ratio de cáncer de mama se reduce con el cultivo de estos productos transgénicos hasta más de la mitad. 
+  - **Cancer de Mama:**
+  Podemos observar que los diferentes cultivos han demostrado diferentes comportamientos. En el caso de la coliflor tenemos unos resultados que nos indican que en países con un mayor cultivo de coliflores transgénicas obtenemos un índice de cáncer de mama superior. En el caso del pepino y las judías verdes podemos observar que el ratio de cáncer de mama se reduce con el cultivo de estos productos transgénicos hasta más de la mitad. 
   Esta relación concuerda con nuestros objetivos y las premisas teóricas por lo que podemos considerar que la producción y consumo de pepino y judías verdes transgénicas reduce la tasa de cáncer de mama del país.
   
-  
-  
-  
-  - **Isquemias cardiacas**
-  Se puede observar que el resultado de los tres cultivos no ha dado la relación que esperabamos, sino que incluso ha salido a la inversa. Estos resultados al no ser plausibles nos indican que no existe una relación entre ellos.
+  - **Isquemias cardiacas:**
+  Se puede observar que el resultado de los tres cultivos no ha dado la relación que esperabamos, sino que incluso ha salido a la inversa, lo que indicaria que el consumo de esto estos cultivos produciría un aumento de casi el doble de isquemia cardiaca. Estos resultados al no ser plausibles nos indican que no existe una relación entre ellos.
   
 
 ## 5. Bibliografía
