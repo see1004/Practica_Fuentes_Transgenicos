@@ -19,7 +19,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## 1. Introducción
 
-  En este estudio, se pretende conocer que relación existe entre los cultivos transgénicos con los siguientes temas: cancer de mama, isquemia cadiaca y abortos.
+  En este estudio, se pretende conocer que relación existe entre los cultivos transgénicos con los siguientes temas, utilizado solo valores de entre 2015-2020 : cancer de mama, isquemia cardiaca y abortos. 
   
 ## 2. Objetivo específicos: 
   
