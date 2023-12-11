@@ -28,9 +28,9 @@ knitr::opts_chunk$set(echo = TRUE)
   1. **Aborto:**
   No existe ningún tipo de evidencia cientifica que relacione el consumo de coliflor, pepino o judía verde con la tasa de aborto, por ello hemos escogido este factor como muestra control, para comparar su nulo efecto con el impacto en otras patologías.
   2. **Cancer de Mama:**
-  El desarrollo de cáncer de mama viene dado por múltiples factores, algunos de ellos corespondientes con componentes genéticos y otros relacionados con la dieta. Está demostrado que una dieta rica en frutas y verduras ayuda la prevención del cáncer de mama. En relación a esta dieta, queremos comprobar si el cultivo de productos transgénicos diseñados para que tengan unas propiedades más saludables dietéticamente influyen o no en el desarrollo de esta enfermedad y si lo hacen de forma positiva.
+  El desarrollo de cáncer de mama viene dado por múltiples factores, algunos de ellos correspondientes con componentes genéticos y otros relacionados con la dieta. Está demostrado que una dieta rica en frutas y verduras ayuda la prevención del cáncer de mama. En relación a esta dieta, queremos comprobar si el cultivo de productos transgénicos diseñados para que tengan unas propiedades más saludables dietéticamente influyen o no en el desarrollo de esta enfermedad y si lo hacen de forma positiva.
   3. **Isquemia cardiaca:** 
-  La coliflor, el pepino y la judía verde son alimentos ricos en fibra, vitaminas, minerales y antioxidantes que  contribuyen a la reducción del colesterol, la presión arterial, la inflamación y el estrés oxidativo, que son factores de riesgo que producen la isquemia cardiaca, por lo que queremos investigar si existe una relación en los paises en los que se cultivan estos cultivos con la isquemia cardiaca
+  La coliflor, el pepino y la judía verde son alimentos ricos en fibra, vitaminas, minerales y antioxidantes que  contribuyen a la reducción del colesterol, la presión arterial, la inflamación y el estrés oxidativo, que son factores de riesgo que producen la isquemia cardiaca, por lo que queremos investigar si existe una relación en los paises en los que se cultivan estos cultivos con la isquemia cardiaca.
 
 
 ## 3. Tratamiento de datos
@@ -40,8 +40,6 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r}
 library(tidyverse)
 library(readxl)
-library(tidyjson)
-library(ggplot2)
 ```
 
 ### 3.2. Importamos las tablas 
@@ -74,6 +72,7 @@ aborto <- read_delim("INPUT/DATA/datos_aborto.tsv",
     values_to = "Valores"
   )
 aborto
+
 ```
 
 - Tabla de cancer de Mama a nivel europeo
@@ -90,6 +89,7 @@ d_mama <- read_delim("INPUT/DATA/datos_cancer_mama.tsv",
                values_to = "Valores") %>%
   mutate(Valores = as.numeric(gsub("[^0-9.]", "", Valores)))
 d_mama
+
 ```
 Tratamos los datos para obtener tres columnas, una con el país del que hablamos, otra del año de la medición y otra con el valor correspondiente de casos de cáncer de mama (en porcentaje).
 
@@ -188,6 +188,7 @@ unif_mama_cult <- casos_mama_media %>%
   rename (.data = ., Media_Cancer = Valor_Media) %>%
   relocate (.data = ., Cultivo:Hectareas_cultivadas, .before = Media_Cancer)
 unif_mama_cult
+
 ```
 
 - Isquemias cardiacas
@@ -197,13 +198,14 @@ tabla_isquemia <- d_isquemia_media %>%
   inner_join(.,d_cultivos_e) %>%
   relocate(Cultivo:Hectareas_cultivadas, .before =Media_isquemia) 
 tabla_isquemia
+
 ```
 
 ### 3.5. Desarrollo de gráficas de las relaciones
 
 Crearemos las graficas con las relaciones cultivos-enfermedad para evaluar el impacto de los cultivos de cada pais con la tasa a nivel europeo para estudiar las posibles relaciones.
 
-- Aborto - Coliflor
+- Aborto-Coliflor
 
 ```{r}
 fig_a_coliflor <-ggplot(data = filter(tabla_aborto,Cultivo=="Coliflor")) + 
@@ -219,7 +221,7 @@ fig_a_coliflor <-ggplot(data = filter(tabla_aborto,Cultivo=="Coliflor")) +
 fig_a_coliflor
 ```
 
-- Aborto - Pepino
+- Aborto-Pepino
 
 ```{r}
 fig_a_pepino <- ggplot(data = filter(tabla_aborto,Cultivo=="Pepino")) + 
@@ -234,7 +236,7 @@ fig_a_pepino <- ggplot(data = filter(tabla_aborto,Cultivo=="Pepino")) +
   )
 fig_a_pepino
 ```
-- Aborto - Judía
+- Aborto-Judía
 
 ```{r}
 fig_a_judia <- ggplot(data = filter(tabla_aborto,Cultivo=="Judía_verde")) + 
@@ -249,7 +251,8 @@ fig_a_judia <- ggplot(data = filter(tabla_aborto,Cultivo=="Judía_verde")) +
   )
 fig_a_judia
 ```
-- Cancer - Coliflor 
+
+- Cancer-Coliflor 
 
 ```{r}
 fig_c_coliflor <- ggplot(data = filter(unif_mama_cult,Cultivo=="Coliflor")) + 
@@ -264,7 +267,8 @@ fig_c_coliflor <- ggplot(data = filter(unif_mama_cult,Cultivo=="Coliflor")) +
   )
 fig_c_coliflor
 ```
-- Cancer - Pepino
+
+- Cancer-Pepino
 
 ```{r}
 fig_c_pepino <- ggplot(data = filter(unif_mama_cult,Cultivo=="Pepino")) + 
@@ -279,7 +283,8 @@ fig_c_pepino <- ggplot(data = filter(unif_mama_cult,Cultivo=="Pepino")) +
   )
 fig_c_pepino
 ```
-- Cancer - Judía
+
+- Cancer-Judía
 
 ```{r}
 fig_c_judia <-ggplot(data = filter(unif_mama_cult,Cultivo=="Judía_verde")) + 
@@ -294,7 +299,8 @@ fig_c_judia <-ggplot(data = filter(unif_mama_cult,Cultivo=="Judía_verde")) +
   )
 fig_c_judia
 ```
-- Isquemia - Coliflor
+
+- Isquemia-Coliflor
 
 ```{r}
 fig_i_coliflor <- ggplot(data = filter(tabla_isquemia,Cultivo=="Coliflor")) + 
@@ -309,7 +315,8 @@ fig_i_coliflor <- ggplot(data = filter(tabla_isquemia,Cultivo=="Coliflor")) +
   )
 fig_i_coliflor
 ```
-- Isquemia - Pepino
+
+- Isquemia-Pepino
 
 ```{r}
 fig_i_pepino <- ggplot(filter(tabla_isquemia,Cultivo=="Pepino")) + 
@@ -324,7 +331,8 @@ fig_i_pepino <- ggplot(filter(tabla_isquemia,Cultivo=="Pepino")) +
   )
 fig_i_pepino
 ```
-- Isquemia - Judía
+
+- Isquemia-Judía
 
 ```{r}
 fig_i_judia <- ggplot(data = filter(tabla_isquemia,Cultivo=="Judía_verde")) + 
@@ -339,6 +347,7 @@ fig_i_judia <- ggplot(data = filter(tabla_isquemia,Cultivo=="Judía_verde")) +
   )
 fig_i_judia
 ```
+
 ## 4. Conclusiones
 
   Realizamos el análisis de los datos obtenidos de las gráficas con cada una de las enfermedades:
